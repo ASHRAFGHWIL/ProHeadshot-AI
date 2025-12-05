@@ -16,6 +16,69 @@ export const STYLES_DATA: HeadshotStyle[] = [
     prompt: "Professional photo retouch of this image. Improve lighting balance, enhance skin texture to be realistic but clean, and sharpen details. output in 8k resolution. STRICTLY maintain the subject's exact facial features and identity. Do not alter facial structure. Style: High-end magazine photography."
   },
   {
+    id: "classic_portrait",
+    name: "Classic Portrait",
+    previewColor: "bg-slate-500",
+    icon: "camera",
+    prompt: "Classic studio portrait. Angle: Front facing 0 degrees. Lighting: Classic Softbox lighting, soft and flattering. Background: Soft smooth grey. Subject: Head and shoulders, slight smile, shoulders slightly tilted. Style: High-quality professional photography. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "corporate_office",
+    name: "Corporate Office Shot",
+    previewColor: "bg-blue-700",
+    icon: "briefcase",
+    prompt: "Corporate Office Portrait. Angle: 15 degrees from front. Location: Modern glass office background. Pose: Standing confidently, hands clasped or holding a laptop. Lighting: Professional white office lighting. Background: Blurred modern office environment. Subject: Professional business attire. Style: High-quality corporate photography. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "hero_angle_low",
+    name: "Hero Angle Low Shot",
+    previewColor: "bg-indigo-800",
+    icon: "rocket",
+    prompt: "Hero Angle Portrait. Angle: Extreme Low angle shot looking up at the subject (worm's-eye view). Location: High-rise building rooftop or dramatic sky. Pose: Strong heroic stance, chin raised, confident expression. Lighting: Cinematic backlighting (rim light) creating a halo. Style: Dramatic, movie poster aesthetic, high quality. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "night_portrait_glow",
+    name: "Night Portrait Soft Glow",
+    previewColor: "bg-pink-800",
+    icon: "heart",
+    prompt: "Night Portrait Soft Glow. Angle: 45 degrees from the left. Location: On a bridge or corniche at night. Pose: Side smiling glance, romantic mood. Lighting: Soft warm glow on face. Background: Beautiful city bokeh (blurred city lights). Style: Romantic, atmospheric, cinematic night photography. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "street_lifestyle",
+    name: "Street Lifestyle Shot",
+    previewColor: "bg-violet-700",
+    icon: "building",
+    prompt: "Street Lifestyle Portrait. Angle: 20 degrees from the right. Location: Busy city center at night. Pose: Captured mid-step while walking, candid movement. Lighting: Vibrant neon city lights with reflections on the street/ground. Background: Crowded urban environment at night. Style: Dynamic urban photography, cinematic. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "sport_action",
+    name: "Sport Action Portrait",
+    previewColor: "bg-orange-600",
+    icon: "dumbbell",
+    prompt: "Sport Action Portrait. Angle: 10 degrees high angle. Location: Gym or open field. Pose: Light movement or ready stance (athletic). Details: Dramatic lighting, slight sweat beads on skin for realism. Style: High energy sports photography, intense, sharp focus. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "artistic_shadow",
+    name: "Artistic Shadow Play",
+    previewColor: "bg-stone-950",
+    icon: "window",
+    prompt: "Artistic Shadow Play Portrait. Angle: 60 degrees from the left. Location: Indoor room with strong window lighting. Pose: Subject positioned for split lighting - half face in light, half in deep shadow. Mood: Serious, dramatic, high contrast. Style: Artistic photography, chiaroscuro. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "extreme_closeup",
+    name: "Extreme Close-Up",
+    previewColor: "bg-neutral-950",
+    icon: "eye",
+    prompt: "Extreme Close-Up Portrait. Angle: Direct front facing. Location: Solid black background. Pose: Intense focus on eye expression and facial details. Lighting: Narrow beam lighting focused strictly on the eyes. Style: Macro photography, dramatic, high contrast. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
+    id: "golden_hour_outdoor",
+    name: "Golden Hour Outdoor",
+    previewColor: "bg-amber-500",
+    icon: "sun",
+    prompt: "Outdoor Lifestyle Portrait. Angle: 45 degrees from the right. Location: European street at sunset. Lighting: Golden Hour backlight (rim light) creating a warm halo. Background: Blurred European street with soft bokeh. Subject: Head and shoulders, candid side glance, spontaneous expression. Style: Professional outdoor photography, warm tones. STRICTLY maintain the subject's exact facial features and identity."
+  },
+  {
     id: "sketch_to_digital",
     name: "Sketch to Digital",
     previewColor: "bg-indigo-600",
@@ -157,10 +220,10 @@ export const STYLES_DATA: HeadshotStyle[] = [
   },
   {
     id: "vintage_film",
-    name: "Vintage Film",
+    name: "Vintage Film Look",
     previewColor: "bg-sepia-600",
     icon: "film",
-    prompt: "Vintage 1920s photograph. Sepia tone, heavy film grain, vignette, and soft focus. Subject appears timeless. Scratched texture overlay. Old photo aesthetic. Maintain subject's facial identity."
+    prompt: "Vintage 1920s photograph with sepia tone, heavy film grain, vignette, and soft focus, maintaining the subject's facial identity. Negative: color, sharp focus, modern."
   },
   {
     id: "cyberpunk",
@@ -206,6 +269,15 @@ export const TRANSLATIONS = {
     styles: {
       cinematic_cartoon: { name: "Cinematic Cartoon", desc: "High-end 3D animated movie style (Pixar-esque) with expressive features and dramatic lighting." },
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
+      classic_portrait: { name: "Classic Portrait", desc: "Front facing, soft grey background, slight smile, classic softbox lighting." },
+      corporate_office: { name: "Corporate Office Shot", desc: "15° Angle, Modern Glass Office, Standing Pose, Professional White Lighting." },
+      hero_angle_low: { name: "Hero Angle Low Shot", desc: "Low angle (from below), dramatic sky/building, strong chin-up pose, cinematic backlight." },
+      night_portrait_glow: { name: "Night Portrait Soft Glow", desc: "45° left, bridge/corniche at night, side smiling glance, warm soft glow, city bokeh." },
+      street_lifestyle: { name: "Street Lifestyle Shot", desc: "20° right, busy city night, candid walking pose, neon lights & reflections." },
+      sport_action: { name: "Sport Action Portrait", desc: "10° high angle, gym/field, athletic stance, dramatic lighting, realistic sweat details." },
+      artistic_shadow: { name: "Artistic Shadow Play", desc: "60° Left, Window Light, High Contrast, Split Face Shadow, Serious Mood." },
+      extreme_closeup: { name: "Extreme Close-Up", desc: "Direct front, solid black background, intense eye focus, narrow dramatic lighting." },
+      golden_hour_outdoor: { name: "Golden Hour Outdoor", desc: "45° Right, European Sunset, Candid Side Glance, Backlit." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
       pencil_sketch: { name: "Pencil Sketch", desc: "Hand-drawn graphite look on textured paper with detailed cross-hatching and shading." },
       watercolor_art: { name: "Watercolor Art", desc: "Hand-painted watercolor illustration with soft washes, visible brush textures, and organic edges." },
@@ -226,7 +298,7 @@ export const TRANSLATIONS = {
       tech_startup: { name: "Tech Founder", desc: "Modern open office background, smart casual, approachable yet leader-like." },
       outdoor: { name: "Outdoor Natural", desc: "Golden hour lighting, nature bokeh, warm and friendly atmosphere." },
       studio_bw: { name: "Studio B&W", desc: "High contrast black and white, dramatic shadows, artistic and timeless." },
-      vintage_film: { name: "Vintage Film", desc: "Sepia tones, film grain texture, timeless and nostalgic atmosphere." },
+      vintage_film: { name: "Vintage Film Look", desc: "Vintage 1920s photo with sepia tone, heavy grain, and soft focus." },
       cyberpunk: { name: "Cyberpunk Neon", desc: "Futuristic neon lighting, night city background, vibrant pinks and blues." },
     },
     quickPrompts: [
@@ -270,6 +342,15 @@ export const TRANSLATIONS = {
     styles: {
       cinematic_cartoon: { name: "كارتون سينمائي", desc: "أسلوب أفلام الرسوم المتحركة ثلاثية الأبعاد (ستايل بيكسار) مع ملامح معبرة وإضاءة درامية." },
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
+      classic_portrait: { name: "بورتريه كلاسيكي", desc: "زاوية مواجهة، خلفية رمادية ناعمة، ابتسامة بسيطة، إضاءة سوفت بوكس كلاسيكية." },
+      corporate_office: { name: "لقطة عمل احترافية", desc: "زاوية 15°، مكتب زجاجي حديث، وقفة واثقة، إضاءة بيضاء رسمية، خلفية ضبابية." },
+      hero_angle_low: { name: "لقطة هيرو درامية", desc: "زاوية من أسفل للأعلى، خلفية مبنى شاهق أو سماء، وقفة قوية ذقن مرفوع، إضاءة سينمائية." },
+      night_portrait_glow: { name: "لقطة رومانسية ليلية", desc: "زاوية 45° يسار، على جسر أو كورنيش ليلاً، نظرة جانبية مبتسمة، ضوء دافئ ناعم وخلفية أضواء المدينة." },
+      street_lifestyle: { name: "لقطة شوارع", desc: "20° يمين، وسط المدينة ليلاً، لقطة مشي عفوية، أضواء نيون وانعكاسات." },
+      sport_action: { name: "لقطة رياضية طاقتها عالية", desc: "زاوية 10° من الأعلى، جيم أو ساحة مفتوحة، وضعية استعداد، إضاءة درامية، تفاصيل عرق لواقعية." },
+      artistic_shadow: { name: "لقطة فنية مع ظلال قوية", desc: "زاوية 60° يسار، إضاءة نافذة قوية، تباين عالي، نصف الوجه في الظل، طابع جاد." },
+      extreme_closeup: { name: "لقطة مقربة بارعة", desc: "مواجهة مباشرة، خلفية سوداء، تركيز على تفاصيل العين، إضاءة ضيقة ومحددة." },
+      golden_hour_outdoor: { name: "لقطة خارجية ذهبية", desc: "45° يمين، شارع أوروبي وقت الغروب، نظرة جانبية عفوية، إضاءة خلفية." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
       pencil_sketch: { name: "رسم بقلم الرصاص", desc: "مظهر رسم يدوي بالجرافيت على ورق محكم مع تظليل وتفاصيل دقيقة." },
       watercolor_art: { name: "فن الألوان المائية", desc: "رسم بالألوان المائية يدويًا مع تدرجات ناعمة وملمس فرشاة مرئي." },
@@ -290,7 +371,7 @@ export const TRANSLATIONS = {
       tech_startup: { name: "رائد أعمال تقني", desc: "خلفية مكتب عصري مفتوح، ملابس أنيقة غير رسمية (Smart Casual)." },
       outdoor: { name: "إضاءة طبيعية", desc: "إضاءة الساعة الذهبية، خلفية طبيعية، جو دافئ وودود." },
       studio_bw: { name: "استوديو أبيض وأسود", desc: "تباين عالي، ظلال درامية، طابع فني كلاسيكي." },
-      vintage_film: { name: "طابع سينمائي كلاسيكي", desc: "ألوان دافئة (Sepia)، نسيج محبب، ومظهر كلاسيكي خالد." },
+      vintage_film: { name: "مظهر الفيلم القديم", desc: "صورة من عشرينات القرن الماضي مع لون سيبيا، حبيبات فيلم، وتركيز ناعم." },
       cyberpunk: { name: "سايبر بانك نيون", desc: "ألوان نيون زاهية، خلفية مدينة مستقبلية، وإضاءة درامية." },
     },
     quickPrompts: [

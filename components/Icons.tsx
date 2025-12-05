@@ -289,3 +289,44 @@ export const RocketIcon: React.FC<{ className?: string }> = ({ className }) => (
     <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
   </svg>
 );
+
+export const EyeIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+export const BuildingIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+    <path d="M9 22v-4h6v4" />
+    <path d="M8 6h.01" />
+    <path d="M16 6h.01" />
+    <path d="M12 6h.01" />
+    <path d="M12 10h.01" />
+    <path d="M12 14h.01" />
+    <path d="M16 10h.01" />
+    <path d="M16 14h.01" />
+    <path d="M8 10h.01" />
+    <path d="M8 14h.01" />
+  </svg>
+);
+
+export const HeartIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M19 14c1.49-1.28 3.6-2.36 4.57-4.66C24.48 6.53 22.82 2.76 19.5 2c-3.35-.78-5.75.98-7.5 3.32C10.25 2.98 7.85 1.22 4.5 2 1.18 2.76-.48 6.53 1.43 9.34c.97 2.3 3.08 3.38 4.57 4.66l6 6.35z" />
+  </svg>
+);
+
+export const DumbbellIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m6.5 6.5 11 11" />
+    <path d="m21 21-1-1" />
+    <path d="m3 3 1 1" />
+    <path d="m18 22 4-4" />
+    <path d="m2 6 4-4" />
+    <path d="m3 10 7-7" />
+    <path d="m14 21 7-7" />
+  </svg>
+);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon, MoonIcon, WindowIcon, RingLightIcon, BrushIcon, PenToolIcon, PaletteIcon, CrayonIcon, CrackedFaceIcon, LayersIcon, RocketIcon } from './Icons';
+import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon, MoonIcon, WindowIcon, RingLightIcon, BrushIcon, PenToolIcon, PaletteIcon, CrayonIcon, CrackedFaceIcon, LayersIcon, RocketIcon, EyeIcon, BuildingIcon, HeartIcon, DumbbellIcon } from './Icons';
 
 export const StyleIcon: React.FC<{ icon: string, className?: string }> = ({ icon, className }) => {
     switch (icon) {
@@ -26,6 +26,10 @@ export const StyleIcon: React.FC<{ icon: string, className?: string }> = ({ icon
       case 'film': return <FilmIcon className={className} />;
       case 'zap': return <ZapIcon className={className} />;
       case 'rocket': return <RocketIcon className={className} />;
+      case 'eye': return <EyeIcon className={className} />;
+      case 'building': return <BuildingIcon className={className} />;
+      case 'heart': return <HeartIcon className={className} />;
+      case 'dumbbell': return <DumbbellIcon className={className} />;
       default: return <CameraIcon className={className} />;
     }
 };
