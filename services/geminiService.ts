@@ -43,26 +43,39 @@ export const generateOrEditImage = async (
         imageConfig: {
           aspectRatio: "3:4", // Matches UI vertical aspect ratio
         },
-        // Relax safety settings slightly to prevent false positives on standard portraits
+        // Relax safety settings to BLOCK_NONE to prevent false positives on standard portraits
+        // Note: BLOCK_NONE minimizes refusals for creative tasks, but requires a paid project or specific model support.
+        // If BLOCK_NONE fails, fallback to BLOCK_ONLY_HIGH in your own logic, but here we assume it's supported for the best experience.
         safetySettings: [
-          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
-          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
-          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
-          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH },
+          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
         ],
       }
     });
 
     const candidate = response.candidates?.[0];
 
+    // Log finish reason for debugging
+    if (candidate?.finishReason) {
+        console.log("Gemini Generation Finish Reason:", candidate.finishReason);
+    }
+
     // Check for safety finish reason if no content
     if (!candidate?.content) {
+        const reason = candidate?.finishReason;
+        
+        if (reason === 'SAFETY') {
+            throw new Error("The generation was blocked due to safety concerns. Please try a different photo or prompt.");
+        }
+
         // Handle "IMAGE_OTHER" or "OTHER" which often means the model refused the request due to policy 
         // (often triggered by "exact identity" requests on real people).
-        const reason = candidate?.finishReason;
         if (reason === 'OTHER' || reason === 'IMAGE_OTHER') {
-             throw new Error("The AI model was unable to process this image. It may contain content that triggers safety or quality filters. Please try a different photo or style.");
+             throw new Error("The AI model was unable to process this image due to content policy filters. Please try a different photo or style.");
         }
+        
         if (reason) {
              throw new Error(`Generation stopped. Reason: ${reason}`);
         }
@@ -88,6 +101,7 @@ export const generateOrEditImage = async (
     // If no image part found, maybe there's text explaining why (safety, etc)
     const textPart = parts.find(p => p.text);
     if (textPart) {
+      // Sometimes the model explains the refusal in text
       throw new Error(`Generation returned text instead of image: "${textPart.text}"`);
     }
 

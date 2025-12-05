@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeadshotStyle } from '../types';
-import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon, MoonIcon, WindowIcon, RingLightIcon, BrushIcon, PenToolIcon, PaletteIcon, CrayonIcon, CrackedFaceIcon } from './Icons';
+import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon, MoonIcon, WindowIcon, RingLightIcon, BrushIcon, PenToolIcon, PaletteIcon, CrayonIcon, CrackedFaceIcon, LayersIcon } from './Icons';
 
 interface StyleCardProps {
   style: HeadshotStyle;
@@ -20,6 +20,7 @@ const StyleCard: React.FC<StyleCardProps> = ({ style, name, description, isSelec
       case 'palette': return <PaletteIcon className="w-6 h-6" />;
       case 'crayon': return <CrayonIcon className="w-6 h-6" />;
       case 'cracked_mask': return <CrackedFaceIcon className="w-6 h-6" />;
+      case 'layers': return <LayersIcon className="w-6 h-6" />;
       case 'lamp': return <LampIcon className="w-6 h-6" />;
       case 'grid': return <GridIcon className="w-6 h-6" />;
       case 'blinds': return <BlindsIcon className="w-6 h-6" />;
