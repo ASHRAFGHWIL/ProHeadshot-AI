@@ -6,70 +6,77 @@ export const STYLES_DATA: HeadshotStyle[] = [
     name: "Professional Retouch",
     previewColor: "bg-teal-600",
     icon: "enhance",
-    prompt: "Enhance this portrait to look professional and high-quality. Improve lighting, clarity, and texture while keeping the person's facial features and identity exactly the same. Reduce noise and ensure a realistic, studio-quality look."
+    prompt: "Enhance this portrait to look professional and high-quality. Improve lighting, clarity, and texture to create a realistic, studio-quality look. Preserve the subject's likeness and natural features while reducing noise and refining details."
   },
   {
     id: "sketch_to_digital",
     name: "Sketch to Digital",
     previewColor: "bg-indigo-600",
     icon: "pencil",
-    prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure, composition, and facial features. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork suitable for a professional profile or concept art."
+    prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure and composition. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork."
+  },
+  {
+    id: "noir_lamp",
+    name: "1940s Noir",
+    previewColor: "bg-stone-950",
+    icon: "lamp",
+    prompt: "Create a 1940s film noir style portrait based on this person. Illumination comes from a single old brass desk lamp, casting deep, dramatic shadows and warm light effects (rendered in cinematic black and white). The atmosphere is smoky and melancholic. High contrast chiaroscuro lighting. Close-up shot, sharp details, natural skin texture. High fidelity to the original subject."
   },
   {
     id: "patterned_noir",
     name: "Patterned Noir",
     previewColor: "bg-neutral-800",
     icon: "grid",
-    prompt: "Transform this person into a monochromatic artistic portrait. The subject should have the exact same facial features, hairstyle, and hair color as the reference. Illuminate them with high-contrast patterned light, creating a distinctive network of white dots and deep shadows on their features against a pure black background. The perspective should be from the ground looking up (low angle), with the subject looking directly into the lens. Cinematic 85mm f/1.4 style, rich texture, soft blur, subtle gray transitions. Meticulous detail, natural skin texture."
+    prompt: "Create a monochromatic artistic portrait of this person. Illuminate them with high-contrast patterned light, creating a distinctive network of white dots and deep shadows on their features against a pure black background. The perspective should be from the ground looking up (low angle), with the subject looking directly into the lens. Cinematic 85mm f/1.4 style, rich texture, soft blur, subtle gray transitions. Meticulous detail, natural skin texture."
   },
   {
     id: "surreal_hand",
     name: "Surreal Hand",
     previewColor: "bg-zinc-950",
     icon: "hand",
-    prompt: "Transform this person into a dark surrealist art piece. The subject is captured in a striking close-up, their hand covering their mouth. A dark, elegant smile is etched into the palm of the hand. The subject wears a simple, dark hooded robe with partial illumination. The image is black and white with high-contrast lighting from above, creating deep shadows and mystery. Maintain facial identity in the visible parts."
+    prompt: "Transform this image into a dark surrealist art piece. The subject is captured in a striking close-up, their hand covering their mouth. A dark, elegant smile is etched into the palm of the hand. The subject wears a simple, dark hooded robe with partial illumination. The image is black and white with high-contrast lighting from above, creating deep shadows and mystery. Preserve the subject's likeness in the visible areas."
   },
   {
     id: "corporate",
     name: "Corporate Executive",
     previewColor: "bg-slate-700",
     icon: "briefcase",
-    prompt: "Transform this person into a professional corporate executive headshot. Use a neutral grey gradient studio background. The person should be wearing a high-end tailored business suit. Lighting should be soft and flattering studio lighting. Maintain the person's key facial features and identity but elevate the presentation to be LinkedIn-ready and extremely professional. High resolution, photorealistic, 8k."
+    prompt: "Create a professional corporate executive headshot of this person. Use a neutral grey gradient studio background. The person should be wearing a high-end tailored business suit. Lighting should be soft and flattering studio lighting. Elevate the presentation to be LinkedIn-ready and extremely professional while maintaining the subject's likeness. High resolution, photorealistic, 8k."
   },
   {
     id: "tech_startup",
     name: "Tech Founder",
     previewColor: "bg-blue-600",
     icon: "monitor",
-    prompt: "Transform this person into a modern tech startup founder headshot. Background should be a blurred, bright modern open-plan office with glass and bokeh. The person should wear premium smart-casual attire (e.g., a high-quality t-shirt with a blazer, or a crisp button-down). Lighting should be bright, natural, and energetic. Maintain facial identity. High resolution, photorealistic."
+    prompt: "Create a modern tech startup founder headshot of this person. Background should be a blurred, bright modern open-plan office with glass and bokeh. The person should wear premium smart-casual attire (e.g., a high-quality t-shirt with a blazer, or a crisp button-down). Lighting should be bright, natural, and energetic. Maintain the subject's likeness. High resolution, photorealistic."
   },
   {
     id: "outdoor",
     name: "Outdoor Natural",
     previewColor: "bg-amber-600",
     icon: "sun",
-    prompt: "Transform this person into a professional outdoor lifestyle headshot. Background should be a soft-focus park or city street during golden hour with beautiful bokeh. The person should wear stylish yet relaxed professional clothing. The lighting should be warm, back-lit (rim lighting), and natural. Maintain facial identity. High resolution, photorealistic."
+    prompt: "Create a professional outdoor lifestyle headshot of this person. Background should be a soft-focus park or city street during golden hour with beautiful bokeh. The person should wear stylish yet relaxed professional clothing. The lighting should be warm, back-lit (rim lighting), and natural. Maintain the subject's likeness. High resolution, photorealistic."
   },
   {
     id: "studio_bw",
     name: "Studio B&W",
     previewColor: "bg-stone-900",
     icon: "camera",
-    prompt: "Transform this person into a dramatic black and white studio portrait. Use a pure black background. Lighting should be Rembrandt style with high contrast and deep shadows to create depth. The person should look serious and thoughtful. Attire should be simple and dark (e.g., black turtleneck). Maintain facial identity. High resolution, photorealistic, monochrome."
+    prompt: "Create a dramatic black and white studio portrait of this person. Use a pure black background. Lighting should be Rembrandt style with high contrast and deep shadows to create depth. The person should look serious and thoughtful. Attire should be simple and dark (e.g., black turtleneck). Maintain the subject's likeness. High resolution, photorealistic, monochrome."
   },
   {
     id: "vintage_film",
     name: "Vintage Film",
     previewColor: "bg-sepia-600", // Will need a custom class or fallback, using sepia tone mapping roughly to amber-900 or orange-900
     icon: "film",
-    prompt: "Transform this person into a vintage film style portrait. Apply a sepia tone or warm desaturated color palette with grain texture. The background should be a textured, abstract vintage wall or fabric. Lighting should be soft and natural, reminiscent of early 20th-century photography. Attire should appear timeless. Maintain facial identity. High resolution, photorealistic, cinematic, film grain."
+    prompt: "Create a vintage film style portrait of this person. Apply a sepia tone or warm desaturated color palette with grain texture. The background should be a textured, abstract vintage wall or fabric. Lighting should be soft and natural, reminiscent of early 20th-century photography. Attire should appear timeless. Maintain the subject's likeness. High resolution, photorealistic, cinematic, film grain."
   },
   {
     id: "cyberpunk",
     name: "Cyberpunk Neon",
     previewColor: "bg-purple-600",
     icon: "zap",
-    prompt: "Transform this person into a futuristic cyberpunk character. The background should be a blurred neon-lit futuristic city at night with pink and blue hues. The lighting on the face should be dramatic, with neon rim lighting (magenta and cyan). Attire can include a futuristic jacket or collar detail. Maintain facial identity. High resolution, photorealistic, 8k, cinematic."
+    prompt: "Transform this person into a futuristic cyberpunk character. The background should be a blurred neon-lit futuristic city at night with pink and blue hues. The lighting on the face should be dramatic, with neon rim lighting (magenta and cyan). Attire can include a futuristic jacket or collar detail. Maintain the subject's likeness. High resolution, photorealistic, 8k, cinematic."
   }
 ];
 
@@ -103,6 +110,7 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
+      noir_lamp: { name: "1940s Noir", desc: "Cinematic B&W, illuminated by a desk lamp, smoky atmosphere." },
       patterned_noir: { name: "Patterned Noir", desc: "High-contrast B&W with a dot matrix light pattern and low angle." },
       surreal_hand: { name: "Dark Surrealism", desc: "High-contrast B&W, hand covering mouth with a smile etched on the palm." },
       corporate: { name: "Corporate Executive", desc: "Professional studio lighting, grey gradient background, sharp business attire." },
@@ -148,6 +156,7 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
+      noir_lamp: { name: "نوار الأربعينات", desc: "أبيض وأسود سينمائي، إضاءة مصباح مكتب، جو ضبابي وكئيب." },
       patterned_noir: { name: "نوار منقط", desc: "أبيض وأسود بتباين عالي مع إضاءة بنمط نقاط وزاوية تصوير منخفضة." },
       surreal_hand: { name: "سريالية مظلمة", desc: "صورة سوداء وبيضاء، يد تغطي الفم مع ابتسامة مرسومة على الكف." },
       corporate: { name: "مدير تنفيذي", desc: "إضاءة استوديو احترافية، خلفية رمادية متدرجة، زي رسمي أنيق." },
