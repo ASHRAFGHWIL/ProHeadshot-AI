@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeadshotStyle } from '../types';
-import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon } from './Icons';
+import { BriefcaseIcon, CameraIcon, MonitorIcon, SunIcon, FilmIcon, ZapIcon, WandSparklesIcon, PencilIcon, HandIcon, GridIcon, LampIcon, BlindsIcon, SplitIcon, SunglassesIcon, MoonIcon, WindowIcon, RingLightIcon, BrushIcon, PenToolIcon, PaletteIcon } from './Icons';
 
 interface StyleCardProps {
   style: HeadshotStyle;
@@ -15,11 +15,17 @@ const StyleCard: React.FC<StyleCardProps> = ({ style, name, description, isSelec
     switch (style.icon) {
       case 'enhance': return <WandSparklesIcon className="w-6 h-6" />;
       case 'pencil': return <PencilIcon className="w-6 h-6" />;
+      case 'sketch_pen': return <PenToolIcon className="w-6 h-6" />;
+      case 'brush': return <BrushIcon className="w-6 h-6" />;
+      case 'palette': return <PaletteIcon className="w-6 h-6" />;
       case 'lamp': return <LampIcon className="w-6 h-6" />;
       case 'grid': return <GridIcon className="w-6 h-6" />;
       case 'blinds': return <BlindsIcon className="w-6 h-6" />;
       case 'split': return <SplitIcon className="w-6 h-6" />;
       case 'sunglasses': return <SunglassesIcon className="w-6 h-6" />;
+      case 'moon': return <MoonIcon className="w-6 h-6" />;
+      case 'window': return <WindowIcon className="w-6 h-6" />;
+      case 'ring': return <RingLightIcon className="w-6 h-6" />;
       case 'hand': return <HandIcon className="w-6 h-6" />;
       case 'briefcase': return <BriefcaseIcon className="w-6 h-6" />;
       case 'monitor': return <MonitorIcon className="w-6 h-6" />;

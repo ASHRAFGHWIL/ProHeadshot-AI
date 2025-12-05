@@ -16,6 +16,27 @@ export const STYLES_DATA: HeadshotStyle[] = [
     prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure and composition. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork."
   },
   {
+    id: "pencil_sketch",
+    name: "Pencil Sketch",
+    previewColor: "bg-zinc-500",
+    icon: "sketch_pen",
+    prompt: "Create a high-quality, hand-drawn pencil sketch of this person. Render this image as a highly detailed graphite pencil drawing on textured, off-white heavy-stock paper. Simulate the use of a full range of graphite grades (from hard 2H for light details to soft 6B for deep shadows). Utilize visible cross-hatching and directional strokes to define volume and shadow. Employ expressive, varying line weights: sharp and dark for occlusion shadows, faint and wispy for highlights and textures. Keep the edges slightly loose or unfinished to maintain an authentic sketchbook aesthetic. Lighting should be high-contrast monochromatic tonal depth. Negative: Color, digital painting, smooth gradients, vector art, gloss, blur, 3D rendering artifacts."
+  },
+  {
+    id: "watercolor_art",
+    name: "Watercolor Art",
+    previewColor: "bg-cyan-500",
+    icon: "brush",
+    prompt: "Create a professional hand-painted watercolor illustration of this person. The style must feature soft watercolor washes, visible brush textures, subtle gradients, and organic edges with natural pigment diffusion. Render the subject with artistic precision on textured cold-press watercolor paper, utilizing wet-on-wet techniques for blending and distinct dry-brush strokes for details. The lighting should be soft and natural, enhancing the fluid, translucent quality of the medium. Maintain the subject's likeness while strictly adhering to a traditional analog watercolor aesthetic. Negative: digital vector look, sharp artificial outlines, opaque acrylic look, photography."
+  },
+  {
+    id: "oil_painting",
+    name: "Oil Painting",
+    previewColor: "bg-emerald-800",
+    icon: "palette",
+    prompt: "Create a high-quality, hand-painted oil portrait of this person. Apply the aesthetic of traditional oil painting with visible, textured brushstrokes (impasto) and rich, layered colors. The image should exhibit the physical properties of oil paint on canvas, including soft edges, organic blending, and tonal depth. Lighting should be atmospheric and classical, enhancing the subject's features with a warm, painterly glow. The background should be abstract and textured. Negative: digital smoothness, vector art, hyper-realistic photography, flat colors."
+  },
+  {
     id: "orange_blue",
     name: "Orange & Blue Split",
     previewColor: "bg-blue-800",
@@ -28,6 +49,27 @@ export const STYLES_DATA: HeadshotStyle[] = [
     previewColor: "bg-red-600",
     icon: "sunglasses",
     prompt: "Create a portrait of this person, likely in their forties, with the same facial features, hairstyle, and hair color as in the reference image, captured in sharp detail and with natural skin, stands in a dynamic, high-angle shot. He wears a black Designoart hat, stylish sunglasses that dangle slightly, a black leather jacket, a black shirt, black trousers, and black and gray sneakers. His right hand adjusts his sunglasses while his left rests on his hip, looking directly at the camera. The background is a bright, static red. Studio lighting, dramatic, high contrast, and natural shadows. Negative: Blurry, low resolution, extra edges, poor anatomy, watermark, text."
+  },
+  {
+    id: "neon_night",
+    name: "Neon Night",
+    previewColor: "bg-fuchsia-800",
+    icon: "moon",
+    prompt: "A man, likely in his early fifties, with the exact same facial features, hairstyle, and hair color as the reference image, captured in fine detail and with natural-looking skin. He wears a black leather jacket and looks directly at the viewer in a medium shot, slightly off-center. The scene is an urban environment at night, illuminated by vibrant neon lights that cast strong pink and blue hues on his face and jacket. The lighting creates a high-contrast, distinctive atmosphere. The image was shot using a state-of-the-art cinematic lens (85mm f/1.4) to achieve rich texture, soft background blur, and precise color transitions, ensuring a hyper-realistic portrait that perfectly matches the reference man's facial features and style. Cons: Blurry, Low Resolution, Extra Edges, Poor Anatomy, Watermark, Text"
+  },
+  {
+    id: "golden_hour_knit",
+    name: "Golden Hour Knit",
+    previewColor: "bg-amber-700",
+    icon: "window",
+    prompt: "Indoor cinematic portrait of this person under warm golden hour light spilling through blinds. He wears a cream knit sweater, leaning against a wooden wall, eyes half-lit, expression thoughtful. The interplay of light and shadow forms geometric patterns on his face and clothes. Background softly blurred with amber highlights. Captured with an 85mm lens for intimate cinematic mood, realistic textures, and emotional subtlety. Negative: Blurry, low resolution, bad anatomy, watermark, text."
+  },
+  {
+    id: "ring_light",
+    name: "Ring Light",
+    previewColor: "bg-rose-700",
+    icon: "ring",
+    prompt: "A man, same facial features and hairstyle, wearing a casual light hoodie. A large ring light placed directly in front creates circular reflections in his pupils and soft, even shadows around his face. Two low-powered PAR Cans behind him add faint color gradients (violet and amber) that subtly outline his silhouette against the black background. Negative: blurry, low-res, watermark, text."
   },
   {
     id: "noir_lamp",
@@ -131,8 +173,14 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
+      pencil_sketch: { name: "Pencil Sketch", desc: "Hand-drawn graphite look on textured paper with detailed cross-hatching and shading." },
+      watercolor_art: { name: "Watercolor Art", desc: "Hand-painted watercolor illustration with soft washes, visible brush textures, and organic edges." },
+      oil_painting: { name: "Oil Painting", desc: "Classic oil-on-canvas aesthetic with rich impasto textures and atmospheric lighting." },
       orange_blue: { name: "Orange & Blue Split", desc: "Modern masculine pose, vertical orange light strip, cool blue background." },
       dynamic_red: { name: "Dynamic Red", desc: "High angle, red background, leather jacket, sunglasses." },
+      neon_night: { name: "Neon Night", desc: "Urban night scene with vibrant pink and blue neon lights, black leather jacket." },
+      golden_hour_knit: { name: "Golden Hour Knit", desc: "Warm cinematic lighting spilling through blinds, cream knit sweater, intimate mood." },
+      ring_light: { name: "Ring Light", desc: "Even illumination with circular catchlights, casual hoodie, violet/amber backlight." },
       noir_lamp: { name: "1940s Noir", desc: "Cinematic B&W, illuminated by a desk lamp, smoky atmosphere." },
       patterned_noir: { name: "Patterned Noir", desc: "High-contrast B&W with a dot matrix light pattern and low angle." },
       outdoor_stripes: { name: "Striped Shadows", desc: "Bright high-contrast B&W, outdoor, mesh shirt, striped shadows." },
@@ -180,8 +228,14 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
+      pencil_sketch: { name: "رسم بقلم الرصاص", desc: "مظهر رسم يدوي بالجرافيت على ورق محكم مع تظليل وتفاصيل دقيقة." },
+      watercolor_art: { name: "فن الألوان المائية", desc: "رسم بالألوان المائية يدويًا مع تدرجات ناعمة وملمس فرشاة مرئي." },
+      oil_painting: { name: "لوحة زيتية", desc: "جمالية الزيت الكلاسيكي على القماش مع قوام بارز وإضاءة جوية." },
       orange_blue: { name: "برتقالي وأزرق", desc: "إضاءة برتقالية عمودية، خلفية زرقاء باردة، ووقفة عصرية واثقة." },
       dynamic_red: { name: "ديناميكي أحمر", desc: "زاوية عالية، خلفية حمراء، سترة جلدية، نظارات شمسية." },
+      neon_night: { name: "ليلة نيون", desc: "مشهد ليلي حضري بأضواء نيون وردية وزرقاء نابضة بالحياة، سترة جلدية سوداء." },
+      golden_hour_knit: { name: "كنزة الساعة الذهبية", desc: "إضاءة سينمائية دافئة عبر الستائر، كنزة كريمية، جو حميمي." },
+      ring_light: { name: "إضاءة حلقية", desc: "إضاءة متوازنة، انعكاسات دائرية في العين، هودي كاجوال، خلفية سوداء مع لمسات بنفسجية." },
       noir_lamp: { name: "نوار الأربعينات", desc: "أبيض وأسود سينمائي، إضاءة مصباح مكتب، جو ضبابي وكئيب." },
       patterned_noir: { name: "نوار منقط", desc: "أبيض وأسود بتباين عالي مع إضاءة بنمط نقاط وزاوية تصوير منخفضة." },
       outdoor_stripes: { name: "ظلال مخططة", desc: "أبيض وأسود عالي التباين، خارجي، قميص شبكي، ظلال مخططة." },
