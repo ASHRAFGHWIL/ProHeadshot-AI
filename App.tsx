@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { AppStep, HeadshotStyle, Language } from './types';
 import { STYLES_DATA, TRANSLATIONS } from './constants';
 import { generateOrEditImage } from './services/geminiService';
-import StyleCard from './components/StyleCard';
+import StyleDropdown from './components/StyleDropdown';
+import { StyleIcon } from './components/StyleIcon';
 import { 
   CameraIcon, 
   UploadCloudIcon, 
@@ -168,7 +169,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Preview of Uploaded Image */}
+        {/* Source Image */}
         <div className="lg:col-span-1">
           <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 sticky top-6">
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 font-arabic">{t.sourceImage}</h3>
@@ -184,48 +185,68 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Style Grid */}
-        <div className="lg:col-span-2 space-y-6">
-           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {STYLES_DATA.map(style => {
-              // Retrieve localized data safely
-              const styleData = t.styles[style.id as keyof typeof t.styles];
-              
-              return (
-                <StyleCard 
-                  key={style.id} 
-                  style={style} 
-                  name={styleData.name}
-                  description={styleData.desc}
-                  isSelected={selectedStyle?.id === style.id} 
-                  onSelect={handleStyleSelect} 
-                />
-              );
-            })}
-          </div>
+        {/* Style Selection - Professional Dropdown Layout */}
+        <div className="lg:col-span-2 flex flex-col h-full">
+            <div className="bg-slate-900/50 rounded-2xl border border-slate-800 p-6 flex-grow">
+               <div className="mb-8">
+                  <StyleDropdown 
+                    styles={STYLES_DATA} 
+                    selectedStyle={selectedStyle} 
+                    onSelect={handleStyleSelect} 
+                    translations={t.styles}
+                    label={t.chooseStyle}
+                  />
+               </div>
 
-          <div className="flex justify-end pt-4">
-            <button
-              onClick={handleGenerate}
-              disabled={!selectedStyle}
-              className={`
-                flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg font-arabic
-                ${selectedStyle 
-                  ? 'bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5' 
-                  : 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                }
-              `}
-            >
-              <SparklesIcon className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
-              {t.generateBtn}
-            </button>
-          </div>
-          
-          {error && (
-            <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-xl text-red-200 mt-4 font-arabic">
-              {error}
+               {/* Selected Style Details Card */}
+               <div className="transition-all duration-300 ease-in-out min-h-[160px]">
+                 {selectedStyle ? (
+                    <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 animate-fade-in">
+                       <div className="flex items-start gap-4">
+                          <div className={`p-3 rounded-xl ${selectedStyle.previewColor} text-white shadow-lg`}>
+                              <StyleIcon icon={selectedStyle.icon} className="w-8 h-8" />
+                          </div>
+                          <div>
+                             <h3 className="text-xl font-bold text-white mb-2 font-arabic">
+                                {t.styles[selectedStyle.id as keyof typeof t.styles].name}
+                             </h3>
+                             <p className="text-slate-300 leading-relaxed font-arabic">
+                                {t.styles[selectedStyle.id as keyof typeof t.styles].desc}
+                             </p>
+                          </div>
+                       </div>
+                    </div>
+                 ) : (
+                    <div className="h-full flex flex-col items-center justify-center text-slate-600 border-2 border-dashed border-slate-800 rounded-xl p-8">
+                        <MagicWandIcon className="w-8 h-8 mb-3 opacity-50" />
+                        <p className="font-arabic">Select a style to preview details</p>
+                    </div>
+                 )}
+               </div>
+
+               <div className="mt-8 flex justify-end">
+                  <button
+                    onClick={handleGenerate}
+                    disabled={!selectedStyle}
+                    className={`
+                      flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg font-arabic w-full md:w-auto justify-center
+                      ${selectedStyle 
+                        ? 'bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5' 
+                        : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                      }
+                    `}
+                  >
+                    <SparklesIcon className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
+                    {t.generateBtn}
+                  </button>
+               </div>
+               
+               {error && (
+                <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-xl text-red-200 mt-4 font-arabic animate-fade-in">
+                  {error}
+                </div>
+              )}
             </div>
-          )}
         </div>
       </div>
     </div>

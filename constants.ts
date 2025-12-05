@@ -6,161 +6,161 @@ export const STYLES_DATA: HeadshotStyle[] = [
     name: "Professional Retouch",
     previewColor: "bg-teal-600",
     icon: "enhance",
-    prompt: "Enhance this portrait to look professional and high-quality. Improve lighting, clarity, and texture to create a realistic, studio-quality look. Preserve the subject's likeness and natural features while reducing noise and refining details."
+    prompt: "Professional photo retouch of this image. Improve lighting balance, enhance skin texture to be realistic but clean, and sharpen details. output in 8k resolution. STRICTLY maintain the subject's exact facial features and identity. Do not alter facial structure. Style: High-end magazine photography."
   },
   {
     id: "sketch_to_digital",
     name: "Sketch to Digital",
     previewColor: "bg-indigo-600",
     icon: "pencil",
-    prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure and composition. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork."
+    prompt: "Transform this sketch into a realistic digital painting. Add realistic skin tones, shading, and dramatic lighting while respecting the original line work and composition. Style: High-quality concept art, smooth digital painting. Remove paper grain. Maintain the subject's likeness."
   },
   {
     id: "pencil_sketch",
     name: "Pencil Sketch",
     previewColor: "bg-zinc-500",
     icon: "sketch_pen",
-    prompt: "Create a high-quality, hand-drawn pencil sketch of this person. Render this image as a highly detailed graphite pencil drawing on textured, off-white heavy-stock paper. Simulate the use of a full range of graphite grades (from hard 2H for light details to soft 6B for deep shadows). Utilize visible cross-hatching and directional strokes to define volume and shadow. Employ expressive, varying line weights: sharp and dark for occlusion shadows, faint and wispy for highlights and textures. Keep the edges slightly loose or unfinished to maintain an authentic sketchbook aesthetic. Lighting should be high-contrast monochromatic tonal depth. Negative: Color, digital painting, smooth gradients, vector art, gloss, blur, 3D rendering artifacts."
+    prompt: "Create a high-quality graphite pencil sketch portrait. detailed cross-hatching shading, rough paper texture, monochromatic grey tones. Style: Traditional fine art sketch. Maintain the subject's facial identity. Negative: color, smooth digital gradients."
   },
   {
     id: "watercolor_art",
     name: "Watercolor Art",
     previewColor: "bg-cyan-500",
     icon: "brush",
-    prompt: "Create a professional hand-painted watercolor illustration of this person. The style must feature soft watercolor washes, visible brush textures, subtle gradients, and organic edges with natural pigment diffusion. Render the subject with artistic precision on textured cold-press watercolor paper, utilizing wet-on-wet techniques for blending and distinct dry-brush strokes for details. The lighting should be soft and natural, enhancing the fluid, translucent quality of the medium. Maintain the subject's likeness while strictly adhering to a traditional analog watercolor aesthetic. Negative: digital vector look, sharp artificial outlines, opaque acrylic look, photography."
+    prompt: "Watercolor painting portrait. Soft, translucent color washes, visible paint drips, and wet-on-wet blending techniques. Textured cold-press paper background. Style: Dreamy, artistic, organic edges. Maintain the subject's facial features."
   },
   {
     id: "oil_painting",
     name: "Oil Painting",
     previewColor: "bg-emerald-800",
     icon: "palette",
-    prompt: "Create a high-quality, hand-painted oil portrait of this person. Apply the aesthetic of traditional oil painting with visible, textured brushstrokes (impasto) and rich, layered colors. The image should exhibit the physical properties of oil paint on canvas, including soft edges, organic blending, and tonal depth. Lighting should be atmospheric and classical, enhancing the subject's features with a warm, painterly glow. The background should be abstract and textured. Negative: digital smoothness, vector art, hyper-realistic photography, flat colors."
+    prompt: "Classic oil painting portrait on canvas. Visible impasto brushstrokes, rich blended colors, and texture. Rembrandt-style dramatic lighting. Style: Traditional fine art masterpiece. Maintain the subject's facial identity. Negative: flat digital look, photograph."
   },
   {
     id: "pastel_art",
     name: "Pastel Art",
     previewColor: "bg-rose-400",
     icon: "crayon",
-    prompt: "Create a soft, hand-drawn pastel illustration of this person. Render the image with the texture of dry pastel crayons on coarse-grain paper, featuring visible stroke marks, soft blending, and powdery edges. The lighting should be warm and diffused, creating gentle shadows and highlights. The color palette should be harmonious and slightly desaturated, characteristic of traditional pastel art. Maintain the subject's likeness while prioritizing an artistic, sketch-like quality with organic imperfections. Negative: shiny digital look, vector sharpness, hyper-realism, dark harsh shadows."
+    prompt: "Soft pastel crayon drawing. Chalky texture, gentle blending, and warm soft lighting. Rough paper grain visible. Style: Impressionist pastel portrait. Maintain the subject's likeness. Negative: sharp vector lines, glossy finish."
   },
   {
     id: "surreal_cracks",
     name: "Surreal Cracks",
     previewColor: "bg-neutral-900",
     icon: "cracked_mask",
-    prompt: "Using the uploaded image as a reference, create a high-resolution, black-and-white close-up showing the right side of the subject's face, focusing on the eye and cheek. The composition is a tight vertical crop, highlighting the texture and surreal transformation of the face. Facial Features and Transformation: The subject has a well-defined jaw and cheekbones, natural lips, and a strong nose. The right eye is completely colorless, designed as a solid, reflective black sphere (sclera and iris are black), giving a dramatic and unsettling appearance. The skin around the eye and cheekbones, extending slightly onto the forehead and jaw, is covered with a thick, cracked layer resembling peeling paint, dried plaster, or old porcelain (cracker effect). This cracked layer is white/light gray, contrasting sharply with the dark, textured, granular surface visible beneath. A single, teardrop-shaped droplet of white, cracked material is visible just below the lower eyelid. The hair is natural, short, or styled as in the reference image and is clearly visible at the far left of the image. Composition and Perspective: Extremely close-up, portrait orientation. The focus is sharp on the eye and the intricate texture of the flaking skin, with a shallow depth of field that blurs the background and the left side of the face/hair. The perspective is slightly angled, looking directly at the right side of the face. Color and Tone: Black and white monochrome. The high contrast highlights the stark white cracks on the dark, rough-textured underlayer and the deep black eye. Rich tonal variations range from bright white on the flaking edges and raised lip areas, through detailed medium grays in the rough-textured areas, to deep black in the eye and shadow areas. Lighting and Atmosphere: Dramatic studio lighting, with a main light slightly angled forward to the right, casts sharp highlights on the flaky edges and lips, and deep shadows that enhance the three-dimensional texture of the cracks. The atmosphere is dark, surreal, unsettling, and richly textured. Artistic Style: Hyperrealistic photography, conceptual portraiture, dark fantasy, horror-inspired, highly detailed texture drawing, realistic rendering, 8K resolution, cinematic quality. Negative Notes: Full body, animation, drawing, low resolution, blurred edges, colors, colored eyes, multiple subjects, text, signature."
+    prompt: "Surreal artistic close-up portrait. The subject's face is cracking like dry white porcelain or peeling paint, revealing a dark, rough texture underneath. One eye is completely solid black (sclera and iris). High contrast black and white photography. Dramatic studio lighting. Maintain the subject's facial structure and identity."
   },
   {
     id: "mixed_media",
     name: "Mixed Media Art",
     previewColor: "bg-stone-600",
     icon: "layers",
-    prompt: "This person, with the exact same facial features, eye details, hairstyle, and hair color as the reference photograph, captured with meticulous detail and a natural, realistic complexion. The image is expressive and profound, rendered in a mixed media style using thick brushstrokes, a rough texture, and prominent paint droplets. The composition is close-up and tightly framed, focusing on the upper chest and neckline while keeping the face fully visible with sharp, precisely defined features that mirror the reference photograph, without any blurring or abstraction. The subject's posture suggests a slight upward tilt of the head and a forward orientation, reflected in the placement of shadows and the angles of the body. The clothing is masculine: a dark shirt or jacket, embellished with multi-layered rough strokes, fine pleats, and subtle highlights using deep charcoal, muted black, and muted earth tones. The artistic style blends contemporary expressionism with neo-pictorial abstraction, highlighting emotional depth through dramatic chiaroscuro lighting and finely textured surfaces. The skin around the neck and collarbone features expressive abstract shades of pale green, cool gray, and deep blue blended with muted earth tones, while the face remains entirely realistic and distinct. A distinctive horizontal line runs across the canvas below the collarbone, reinforcing the effect of breaking across two panels. The background is a somber, abstract mix of deep olive green, pale yellow, and dark brown, with layers of scratches, blotches, and dripping textures. A thin, curved white vertical line descends from the upper left, creating a dramatic contrast. The overall atmosphere is somber, contemplative, atmospheric, and rawly emotional, with high-contrast lighting that accentuates the textured medium and expressive depth. Cons: Blurry eyes, pale face, facial features stripped away, inaccurate facial structure, distortion, little detail, dim lighting, AI artifacts, artificial skin, distorted anatomy."
+    prompt: "Mixed media artistic portrait. Combine realistic photography with thick acrylic brushstrokes, ink splatters, and collage textures. Grunge aesthetic, emotional and expressive. Dark moody colors. Maintain the subject's exact facial features. Negative: clean vector art."
   },
   {
     id: "orange_blue",
     name: "Orange & Blue Split",
     previewColor: "bg-blue-800",
     icon: "split",
-    prompt: "Create a portrait of this person, captured with meticulous detail and natural skin. The subject stands confidently in a smart, masculine pose—body slightly away from the camera, gaze gently turned to the side, and hands resting comfortably near chest. Attire is modern, casual menswear (fitted T-shirt or light shirt with jeans or tailored trousers). A striking vertical band of warm orange light brightens the face and body, creating strong contrast and deep shadows. The background is a clean, minimalist blue, bathed in cool ambient blue light. Maintain the subject's likeness. High resolution, photorealistic."
+    prompt: "Cinematic portrait photography. A vertical beam of warm orange light illuminates one side of the face/body, contrasting with a cool blue deep background. High contrast, dramatic shadows. Subject wears modern casual attire. Photorealistic 8k. Maintain exact facial identity."
   },
   {
     id: "dynamic_red",
     name: "Dynamic Red",
     previewColor: "bg-red-600",
     icon: "sunglasses",
-    prompt: "Create a portrait of this person, likely in their forties, with the same facial features, hairstyle, and hair color as in the reference image, captured in sharp detail and with natural skin, stands in a dynamic, high-angle shot. He wears a black Designoart hat, stylish sunglasses that dangle slightly, a black leather jacket, a black shirt, black trousers, and black and gray sneakers. His right hand adjusts his sunglasses while his left rests on his hip, looking directly at the camera. The background is a bright, static red. Studio lighting, dramatic, high contrast, and natural shadows. Negative: Blurry, low resolution, extra edges, poor anatomy, watermark, text."
+    prompt: "Fashion editorial portrait. Subject wearing a black leather jacket and sunglasses. Background is a flat, vibrant, electric red. High-angle shot, dynamic pose. Sharp focus, studio strobe lighting. Photorealistic. Maintain subject's identity."
   },
   {
     id: "neon_night",
     name: "Neon Night",
     previewColor: "bg-fuchsia-800",
     icon: "moon",
-    prompt: "A man, likely in his early fifties, with the exact same facial features, hairstyle, and hair color as the reference image, captured in fine detail and with natural-looking skin. He wears a black leather jacket and looks directly at the viewer in a medium shot, slightly off-center. The scene is an urban environment at night, illuminated by vibrant neon lights that cast strong pink and blue hues on his face and jacket. The lighting creates a high-contrast, distinctive atmosphere. The image was shot using a state-of-the-art cinematic lens (85mm f/1.4) to achieve rich texture, soft background blur, and precise color transitions, ensuring a hyper-realistic portrait that perfectly matches the reference man's facial features and style. Cons: Blurry, Low Resolution, Extra Edges, Poor Anatomy, Watermark, Text"
+    prompt: "Nighttime urban portrait. Illuminating the face with pink and blue neon rim lighting (cyberpunk aesthetic). Background: blurred city lights / bokeh. Subject wears a dark jacket. High contrast, cinematic color grading. Photorealistic. Maintain exact facial identity."
   },
   {
     id: "golden_hour_knit",
     name: "Golden Hour Knit",
     previewColor: "bg-amber-700",
     icon: "window",
-    prompt: "Indoor cinematic portrait of this person under warm golden hour light spilling through blinds. He wears a cream knit sweater, leaning against a wooden wall, eyes half-lit, expression thoughtful. The interplay of light and shadow forms geometric patterns on his face and clothes. Background softly blurred with amber highlights. Captured with an 85mm lens for intimate cinematic mood, realistic textures, and emotional subtlety. Negative: Blurry, low resolution, bad anatomy, watermark, text."
+    prompt: "Intimate cinematic portrait. Warm golden hour sunlight streaming through window blinds, casting slat shadows on the face. Subject wearing a cozy cream knit sweater. Dust motes in the air, soft focus background. Photorealistic, emotional. Maintain subject's identity."
   },
   {
     id: "ring_light",
     name: "Ring Light",
     previewColor: "bg-rose-700",
     icon: "ring",
-    prompt: "A man, same facial features and hairstyle, wearing a casual light hoodie. A large ring light placed directly in front creates circular reflections in his pupils and soft, even shadows around his face. Two low-powered PAR Cans behind him add faint color gradients (violet and amber) that subtly outline his silhouette against the black background. Negative: blurry, low-res, watermark, text."
+    prompt: "Studio influencer portrait. Illuminated by a large ring light (circular catchlights in eyes). Soft, shadowless frontal lighting. Background: dark with subtle violet and amber backlighting. Subject wears a casual hoodie. sharp focus. Photorealistic. Maintain identity."
   },
   {
     id: "noir_lamp",
     name: "1940s Noir",
     previewColor: "bg-stone-950",
     icon: "lamp",
-    prompt: "Create a 1940s film noir style portrait based on this person. Illumination comes from a single old brass desk lamp, casting deep, dramatic shadows and warm light effects (rendered in cinematic black and white). The atmosphere is smoky and melancholic. High contrast chiaroscuro lighting. Close-up shot, sharp details, natural skin texture. High fidelity to the original subject."
+    prompt: "Film Noir style portrait, black and white. Lit by a single desk lamp, creating deep dramatic shadows (chiaroscuro). Smoky atmosphere, cinematic film grain. 1940s detective aesthetic. Maintain subject's facial features."
   },
   {
     id: "patterned_noir",
     name: "Patterned Noir",
     previewColor: "bg-neutral-800",
     icon: "grid",
-    prompt: "Create a monochromatic artistic portrait of this person. Illuminate them with high-contrast patterned light, creating a distinctive network of white dots and deep shadows on their features against a pure black background. The perspective should be from the ground looking up (low angle), with the subject looking directly into the lens. Cinematic 85mm f/1.4 style, rich texture, soft blur, subtle gray transitions. Meticulous detail, natural skin texture."
+    prompt: "Artistic black and white portrait. High contrast. Light is projected through a grid or dot mesh, creating a geometric light pattern across the face. Pitch black background. Dramatic, edgy look. Maintain subject's identity."
   },
   {
     id: "outdoor_stripes",
     name: "Striped Shadows",
     previewColor: "bg-gray-500",
     icon: "blinds",
-    prompt: "Create a bright, high-contrast black and white photograph of this person, shot outdoors against a plain light background. Capture them in full sharp detail with natural skin texture. The subject should be seen in a mid-shot, looking to the right, from a slightly low angle, wearing a light-colored, short-sleeved mesh button-up shirt. Strong directional lighting casts distinct striped shadows across their body and attire. Maintain the subject's likeness. Avoid: blurry, low-res, extra limbs, bad anatomy, watermark, text."
+    prompt: "High-contrast black and white outdoor portrait. Harsh sunlight casting distinct striped shadows (from a fence or pergola) across the subject. Subject wears a textured or mesh shirt. Sharp detail. Photorealistic. Maintain identity."
   },
   {
     id: "surreal_hand",
     name: "Surreal Hand",
     previewColor: "bg-zinc-950",
     icon: "hand",
-    prompt: "Transform this image into a dark surrealist art piece. The subject is captured in a striking close-up, their hand covering their mouth. A dark, elegant smile is etched into the palm of the hand. The subject wears a simple, dark hooded robe with partial illumination. The image is black and white with high-contrast lighting from above, creating deep shadows and mystery. Preserve the subject's likeness in the visible areas."
+    prompt: "Dark surrealist art. Black and white photography. Close up. The subject has a hand covering their mouth, but a dark, realistic smile is etched/tattooed onto the palm of the hand. Dramatic top-down lighting. Moody, mysterious. Maintain subject's upper face identity."
   },
   {
     id: "corporate",
     name: "Corporate Executive",
     previewColor: "bg-slate-700",
     icon: "briefcase",
-    prompt: "Create a professional corporate executive headshot of this person. Use a neutral grey gradient studio background. The person should be wearing a high-end tailored business suit. Lighting should be soft and flattering studio lighting. Elevate the presentation to be LinkedIn-ready and extremely professional while maintaining the subject's likeness. High resolution, photorealistic, 8k."
+    prompt: "Professional LinkedIn headshot. Subject wearing a high-end business suit. Background: neutral studio grey gradient. Lighting: Soft, flattering, professional 3-point setup. Posture: Confident and approachable. Photorealistic 8k. STRICTLY maintain subject's identity."
   },
   {
     id: "tech_startup",
     name: "Tech Founder",
     previewColor: "bg-blue-600",
     icon: "monitor",
-    prompt: "Create a modern tech startup founder headshot of this person. Background should be a blurred, bright modern open-plan office with glass and bokeh. The person should wear premium smart-casual attire (e.g., a high-quality t-shirt with a blazer, or a crisp button-down). Lighting should be bright, natural, and energetic. Maintain the subject's likeness. High resolution, photorealistic."
+    prompt: "Modern tech founder headshot. Subject wearing smart-casual attire (blazer over t-shirt). Background: Bright, blurred modern open-plan office with glass walls. Lighting: Natural, bright, energetic. Photorealistic. Maintain subject's identity."
   },
   {
     id: "outdoor",
     name: "Outdoor Natural",
     previewColor: "bg-amber-600",
     icon: "sun",
-    prompt: "Create a professional outdoor lifestyle headshot of this person. Background should be a soft-focus park or city street during golden hour with beautiful bokeh. The person should wear stylish yet relaxed professional clothing. The lighting should be warm, back-lit (rim lighting), and natural. Maintain the subject's likeness. High resolution, photorealistic."
+    prompt: "Lifestyle outdoor headshot. Golden hour lighting (warm, soft). Background: Blurred park or city street with bokeh. Subject wearing stylish relaxed clothing. Smile: Natural and friendly. Photorealistic 8k. Maintain subject's identity."
   },
   {
     id: "studio_bw",
     name: "Studio B&W",
     previewColor: "bg-stone-900",
     icon: "camera",
-    prompt: "Create a dramatic black and white studio portrait of this person. Use a pure black background. Lighting should be Rembrandt style with high contrast and deep shadows to create depth. The person should look serious and thoughtful. Attire should be simple and dark (e.g., black turtleneck). Maintain the subject's likeness. High resolution, photorealistic, monochrome."
+    prompt: "Classic studio portrait, black and white. Background: Solid black. Lighting: Rembrandt lighting (triangle of light on cheek), high contrast. Subject wearing a black turtleneck or dark simple clothing. Serious, artistic mood. Photorealistic. Maintain identity."
   },
   {
     id: "vintage_film",
     name: "Vintage Film",
-    previewColor: "bg-sepia-600", // Will need a custom class or fallback, using sepia tone mapping roughly to amber-900 or orange-900
+    previewColor: "bg-sepia-600",
     icon: "film",
-    prompt: "Create a vintage film style portrait of this person. Apply a sepia tone or warm desaturated color palette with grain texture. The background should be a textured, abstract vintage wall or fabric. Lighting should be soft and natural, reminiscent of early 20th-century photography. Attire should appear timeless. Maintain the subject's likeness. High resolution, photorealistic, cinematic, film grain."
+    prompt: "Vintage 1920s photograph. Sepia tone, heavy film grain, vignette, and soft focus. Subject appears timeless. Scratched texture overlay. Old photo aesthetic. Maintain subject's facial identity."
   },
   {
     id: "cyberpunk",
     name: "Cyberpunk Neon",
     previewColor: "bg-purple-600",
     icon: "zap",
-    prompt: "Transform this person into a futuristic cyberpunk character. The background should be a blurred neon-lit futuristic city at night with pink and blue hues. The lighting on the face should be dramatic, with neon rim lighting (magenta and cyan). Attire can include a futuristic jacket or collar detail. Maintain the subject's likeness. High resolution, photorealistic, 8k, cinematic."
+    prompt: "Futuristic Cyberpunk portrait. Subject wearing tech-wear / futuristic collar. Lighting: Intense neon magenta and cyan rim lights. Background: Blurred futuristic cityscape. Skin texture: Realistic but lit by neon. Cinematic 8k. Maintain subject's identity."
   }
 ];
 
