@@ -2,6 +2,13 @@ import { HeadshotStyle, Language } from "./types";
 
 export const STYLES_DATA: HeadshotStyle[] = [
   {
+    id: "cinematic_cartoon",
+    name: "Cinematic Cartoon",
+    previewColor: "bg-pink-600",
+    icon: "rocket",
+    prompt: "Generate a high-end 3D cinematic cartoon portrait of this person. Style: Pixar-like 3D animation. Features: Expressive big eyes, smooth stylized skin with subsurface scattering, soft rounded shapes. Lighting: Dramatic studio lighting with rim light to separate subject from background. Background: Blurred, vibrant atmosphere. Render: Octane render, 8k, highly detailed. STRICTLY maintain the subject's recognizable facial identity."
+  },
+  {
     id: "professional_enhance",
     name: "Professional Retouch",
     previewColor: "bg-teal-600",
@@ -197,6 +204,7 @@ export const TRANSLATIONS = {
     clearHistory: "Clear History",
     useImage: "Use",
     styles: {
+      cinematic_cartoon: { name: "Cinematic Cartoon", desc: "High-end 3D animated movie style (Pixar-esque) with expressive features and dramatic lighting." },
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
       pencil_sketch: { name: "Pencil Sketch", desc: "Hand-drawn graphite look on textured paper with detailed cross-hatching and shading." },
@@ -260,6 +268,7 @@ export const TRANSLATIONS = {
     clearHistory: "مسح السجل",
     useImage: "استخدم",
     styles: {
+      cinematic_cartoon: { name: "كارتون سينمائي", desc: "أسلوب أفلام الرسوم المتحركة ثلاثية الأبعاد (ستايل بيكسار) مع ملامح معبرة وإضاءة درامية." },
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
       pencil_sketch: { name: "رسم بقلم الرصاص", desc: "مظهر رسم يدوي بالجرافيت على ورق محكم مع تظليل وتفاصيل دقيقة." },
