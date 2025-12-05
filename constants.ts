@@ -34,7 +34,7 @@ export const STYLES_DATA: HeadshotStyle[] = [
     name: "Hero Angle Low Shot",
     previewColor: "bg-indigo-800",
     icon: "rocket",
-    prompt: "Hero Angle Portrait. Angle: Extreme Low angle shot looking up at the subject (worm's-eye view). Location: High-rise building rooftop or dramatic sky. Pose: Strong heroic stance, chin raised, confident expression. Lighting: Cinematic backlighting (rim light) creating a halo. Style: Dramatic, movie poster aesthetic, high quality. STRICTLY maintain the subject's exact facial features and identity."
+    prompt: "Heroic Portrait. Angle: Low camera angle looking up at the subject (power shot). Location: Rooftop or dramatic sky background. Pose: Confident, chin slightly raised. Lighting: Cinematic backlighting (rim light) creating a silhouette effect. Style: Dramatic, movie poster aesthetic, high quality. STRICTLY maintain the subject's exact facial features and identity."
   },
   {
     id: "night_portrait_glow",
@@ -344,7 +344,7 @@ export const TRANSLATIONS = {
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       classic_portrait: { name: "بورتريه كلاسيكي", desc: "زاوية مواجهة، خلفية رمادية ناعمة، ابتسامة بسيطة، إضاءة سوفت بوكس كلاسيكية." },
       corporate_office: { name: "لقطة عمل احترافية", desc: "زاوية 15°، مكتب زجاجي حديث، وقفة واثقة، إضاءة بيضاء رسمية، خلفية ضبابية." },
-      hero_angle_low: { name: "لقطة هيرو درامية", desc: "زاوية من أسفل للأعلى، خلفية مبنى شاهق أو سماء، وقفة قوية ذقن مرفوع، إضاءة سينمائية." },
+      hero_angle_low: { name: "لقطة درامية بطولية", desc: "زاوية تصوير من الأسفل للأعلى لإظهار القوة، خلفية سماء أو مباني، وقفة واثقة، إضاءة سينمائية." },
       night_portrait_glow: { name: "لقطة رومانسية ليلية", desc: "زاوية 45° يسار، على جسر أو كورنيش ليلاً، نظرة جانبية مبتسمة، ضوء دافئ ناعم وخلفية أضواء المدينة." },
       street_lifestyle: { name: "لقطة شوارع", desc: "20° يمين، وسط المدينة ليلاً، لقطة مشي عفوية، أضواء نيون وانعكاسات." },
       sport_action: { name: "لقطة رياضية طاقتها عالية", desc: "زاوية 10° من الأعلى، جيم أو ساحة مفتوحة، وضعية استعداد، إضاءة درامية، تفاصيل عرق لواقعية." },

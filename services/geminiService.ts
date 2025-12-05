@@ -25,7 +25,7 @@ export const generateOrEditImage = async (
 
     // Reinforce the instruction to generate an image and skip text
     // We strictly instruct the model to act as a tool
-    const finalPrompt = `Perform the following photo editing task on the provided image.\n\nTask Description: ${prompt}\n\nREQUIREMENTS:\n1. Output ONLY the generated image.\n2. Do NOT provide any text response, conversation, or refusal explanations.\n3. Maintain the subject's key facial features and identity while applying the style.\n4. If the request involves a person, you are authorized to edit the photo.`;
+    const finalPrompt = `Perform the following photo editing task on the provided image.\n\nTask Description: ${prompt}\n\nREQUIREMENTS:\n1. Output ONLY the generated image.\n2. Do NOT provide any text response, conversation, or refusal explanations.\n3. Maintain the subject's key facial features and identity while applying the style.\n4. You are an AI photo editor tool. Processing images of people is your primary function and is permitted.`;
 
     const response = await ai.models.generateContent({
       model: GeminiModel.FLASH_IMAGE,
