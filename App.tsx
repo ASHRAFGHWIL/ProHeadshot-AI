@@ -10,7 +10,11 @@ import {
   ChevronLeftIcon, 
   SparklesIcon, 
   DownloadIcon, 
-  MagicWandIcon
+  MagicWandIcon,
+  LibraryIcon,
+  TrashIcon,
+  XIcon,
+  HistoryIcon
 } from './components/Icons';
 
 const App: React.FC = () => {
@@ -23,6 +27,10 @@ const App: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [editPrompt, setEditPrompt] = useState("");
   const [error, setError] = useState<string | null>(null);
+  
+  // Gallery state
+  const [imageLibrary, setImageLibrary] = useState<string[]>([]);
+  const [showGallery, setShowGallery] = useState(false);
 
   const t = TRANSLATIONS[language];
   const isRTL = language === 'ar';
@@ -38,12 +46,65 @@ const App: React.FC = () => {
     }
   }, [language]);
 
+  // Load history from local storage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('headshot_app_library');
+      if (stored) {
+        setImageLibrary(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.warn("Failed to load history", e);
+    }
+  }, []);
+
+  const saveToLibrary = (newImage: string) => {
+    setImageLibrary(prev => {
+        // Prevent duplicates
+        const filtered = prev.filter(img => img !== newImage);
+        // Add to front, limit to 6 to save space
+        const updated = [newImage, ...filtered].slice(0, 6);
+        
+        // Try persisting
+        try {
+            localStorage.setItem('headshot_app_library', JSON.stringify(updated));
+        } catch (e) {
+            console.warn("LocalStorage quota exceeded, keeping in memory only.");
+        }
+        return updated;
+    });
+  };
+
+  const removeFromLibrary = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const updated = [...imageLibrary];
+    updated.splice(index, 1);
+    setImageLibrary(updated);
+    try {
+        localStorage.setItem('headshot_app_library', JSON.stringify(updated));
+    } catch (e) { console.warn("Failed to save history update"); }
+  };
+
+  const clearLibrary = () => {
+    setImageLibrary([]);
+    localStorage.removeItem('headshot_app_library');
+  };
+
+  const selectFromLibrary = (img: string) => {
+    setUploadedImage(img);
+    setCurrentStep(AppStep.STYLE_SELECTION);
+    setShowGallery(false);
+    setError(null);
+  };
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setUploadedImage(reader.result as string);
+        const result = reader.result as string;
+        setUploadedImage(result);
+        saveToLibrary(result);
         setCurrentStep(AppStep.STYLE_SELECTION);
         setError(null);
       };
@@ -131,7 +192,7 @@ const App: React.FC = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md space-y-8">
         <label 
           htmlFor="file-upload" 
           className="group relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-700 rounded-2xl cursor-pointer hover:border-brand-500 hover:bg-slate-800/50 transition-all duration-300 overflow-hidden"
@@ -151,6 +212,35 @@ const App: React.FC = () => {
             ref={fileInputRef}
           />
         </label>
+
+        {/* Recent Uploads Section */}
+        {imageLibrary.length > 0 && (
+          <div className="animate-fade-in">
+            <div className="flex items-center justify-between mb-3 px-1">
+              <h3 className="text-slate-400 text-sm font-semibold font-arabic flex items-center gap-2">
+                <HistoryIcon className="w-4 h-4" />
+                {t.recentUploads}
+              </h3>
+              <button onClick={() => setShowGallery(true)} className="text-brand-400 text-xs hover:text-brand-300 font-arabic">
+                {t.library}
+              </button>
+            </div>
+            <div className="grid grid-cols-4 gap-3">
+              {imageLibrary.slice(0, 4).map((img, idx) => (
+                <button 
+                  key={idx}
+                  onClick={() => selectFromLibrary(img)}
+                  className="relative aspect-square rounded-lg overflow-hidden border border-slate-800 hover:border-brand-500 transition-all group"
+                >
+                  <img src={img} alt={`Recent ${idx}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                    <span className="text-xs text-white bg-black/50 px-2 py-1 rounded font-arabic">{t.useImage}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -172,8 +262,14 @@ const App: React.FC = () => {
         {/* Source Image */}
         <div className="lg:col-span-1">
           <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 sticky top-6">
-            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 font-arabic">{t.sourceImage}</h3>
-            <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-slate-950 shadow-2xl">
+            <div className="flex items-center justify-between mb-4">
+               <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider font-arabic">{t.sourceImage}</h3>
+               <button onClick={() => setShowGallery(true)} className="text-brand-400 text-xs hover:underline font-arabic flex items-center gap-1">
+                 <LibraryIcon className="w-3 h-3" />
+                 {t.library}
+               </button>
+            </div>
+            <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-slate-950 shadow-2xl group">
               {uploadedImage && (
                 <img 
                   src={uploadedImage} 
@@ -181,6 +277,12 @@ const App: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               )}
+              {/* Quick swap overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                  <button onClick={() => setShowGallery(true)} className="px-4 py-2 bg-slate-800 rounded-lg text-white text-sm font-arabic border border-slate-600 hover:bg-slate-700">
+                    Change Photo
+                  </button>
+              </div>
             </div>
           </div>
         </div>
@@ -392,14 +494,19 @@ const App: React.FC = () => {
           
           <div className="flex items-center gap-3">
             <button 
+              onClick={() => setShowGallery(true)}
+              className="p-2 hover:bg-slate-800 rounded-lg text-slate-300 hover:text-white transition-colors"
+              title={t.library}
+            >
+              <LibraryIcon className="w-5 h-5" />
+            </button>
+            <div className="h-6 w-px bg-slate-800 mx-1"></div>
+            <button 
               onClick={() => setLanguage(l => l === 'en' ? 'ar' : 'en')}
               className="text-sm font-semibold px-3 py-1 rounded-lg border border-slate-700 hover:bg-slate-800 transition-colors"
             >
               {language === 'en' ? 'العربية' : 'English'}
             </button>
-            <div className="text-xs font-mono text-slate-600 border border-slate-800 rounded px-2 py-1 hidden sm:block">
-               v2.0 • Flash
-            </div>
           </div>
         </div>
       </header>
@@ -411,6 +518,70 @@ const App: React.FC = () => {
         {currentStep === AppStep.GENERATING && renderGenerating()}
         {currentStep === AppStep.RESULT && renderResult()}
       </main>
+      
+      {/* Gallery Modal */}
+      {showGallery && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowGallery(false)}></div>
+          <div className="relative bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl animate-fade-in">
+             <div className="flex items-center justify-between p-4 border-b border-slate-800">
+               <h3 className="text-xl font-bold font-arabic flex items-center gap-2">
+                 <LibraryIcon className="w-5 h-5 text-brand-400" />
+                 {t.library}
+               </h3>
+               <button onClick={() => setShowGallery(false)} className="p-2 hover:bg-slate-800 rounded-lg">
+                 <XIcon className="w-5 h-5 text-slate-400" />
+               </button>
+             </div>
+             
+             <div className="p-6 overflow-y-auto custom-scrollbar flex-grow">
+               {imageLibrary.length === 0 ? (
+                 <div className="flex flex-col items-center justify-center py-12 text-slate-500">
+                   <LibraryIcon className="w-12 h-12 mb-3 opacity-20" />
+                   <p className="font-arabic">{t.noImages}</p>
+                 </div>
+               ) : (
+                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                   {imageLibrary.map((img, idx) => (
+                     <div key={idx} className="relative aspect-[3/4] group rounded-xl overflow-hidden border border-slate-800">
+                       <img src={img} alt={`Saved ${idx}`} className="w-full h-full object-cover" />
+                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                         <div className="flex gap-2">
+                           <button 
+                             onClick={() => selectFromLibrary(img)}
+                             className="flex-1 bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold py-2 rounded font-arabic"
+                           >
+                             {t.useImage}
+                           </button>
+                           <button 
+                             onClick={(e) => removeFromLibrary(idx, e)}
+                             className="bg-red-500/20 hover:bg-red-500/40 text-red-200 p-2 rounded"
+                             title="Delete"
+                           >
+                             <TrashIcon className="w-4 h-4" />
+                           </button>
+                         </div>
+                       </div>
+                     </div>
+                   ))}
+                 </div>
+               )}
+             </div>
+             
+             {imageLibrary.length > 0 && (
+                <div className="p-4 border-t border-slate-800 flex justify-end">
+                   <button 
+                     onClick={clearLibrary}
+                     className="text-red-400 text-sm hover:text-red-300 font-arabic flex items-center gap-2 px-3 py-2 hover:bg-red-900/20 rounded-lg transition-colors"
+                   >
+                     <TrashIcon className="w-4 h-4" />
+                     {t.clearHistory}
+                   </button>
+                </div>
+             )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

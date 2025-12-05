@@ -191,6 +191,11 @@ export const TRANSLATIONS = {
     connectDesc: "To use the professional model (Nano Banana Pro), you need to select your Google Cloud project.",
     connectBtn: "Select API Key",
     billingNote: "This model requires a paid project. See billing details.",
+    library: "Library",
+    recentUploads: "Recent Uploads",
+    noImages: "No images saved yet.",
+    clearHistory: "Clear History",
+    useImage: "Use",
     styles: {
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
@@ -249,6 +254,11 @@ export const TRANSLATIONS = {
     connectDesc: "لاستخدام النموذج الاحترافي (Nano Banana Pro)، يجب اختيار مشروع Google Cloud الخاص بك.",
     connectBtn: "اختيار مفتاح API",
     billingNote: "يتطلب هذا النموذج مشروعاً مدفوعاً. راجع تفاصيل الفوترة.",
+    library: "المكتبة",
+    recentUploads: "آخر التحميلات",
+    noImages: "لا توجد صور محفوظة.",
+    clearHistory: "مسح السجل",
+    useImage: "استخدم",
     styles: {
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
