@@ -2,6 +2,34 @@ import { HeadshotStyle, Language } from "./types";
 
 export const STYLES_DATA: HeadshotStyle[] = [
   {
+    id: "professional_enhance",
+    name: "Professional Retouch",
+    previewColor: "bg-teal-600",
+    icon: "enhance",
+    prompt: "Enhance this portrait to look professional and high-quality. Improve lighting, clarity, and texture while keeping the person's facial features and identity exactly the same. Reduce noise and ensure a realistic, studio-quality look."
+  },
+  {
+    id: "sketch_to_digital",
+    name: "Sketch to Digital",
+    previewColor: "bg-indigo-600",
+    icon: "pencil",
+    prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure, composition, and facial features. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork suitable for a professional profile or concept art."
+  },
+  {
+    id: "patterned_noir",
+    name: "Patterned Noir",
+    previewColor: "bg-neutral-800",
+    icon: "grid",
+    prompt: "Transform this person into a monochromatic artistic portrait. The subject should have the exact same facial features, hairstyle, and hair color as the reference. Illuminate them with high-contrast patterned light, creating a distinctive network of white dots and deep shadows on their features against a pure black background. The perspective should be from the ground looking up (low angle), with the subject looking directly into the lens. Cinematic 85mm f/1.4 style, rich texture, soft blur, subtle gray transitions. Meticulous detail, natural skin texture."
+  },
+  {
+    id: "surreal_hand",
+    name: "Surreal Hand",
+    previewColor: "bg-zinc-950",
+    icon: "hand",
+    prompt: "Transform this person into a dark surrealist art piece. The subject is captured in a striking close-up, their hand covering their mouth. A dark, elegant smile is etched into the palm of the hand. The subject wears a simple, dark hooded robe with partial illumination. The image is black and white with high-contrast lighting from above, creating deep shadows and mystery. Maintain facial identity in the visible parts."
+  },
+  {
     id: "corporate",
     name: "Corporate Executive",
     previewColor: "bg-slate-700",
@@ -73,6 +101,10 @@ export const TRANSLATIONS = {
     connectBtn: "Select API Key",
     billingNote: "This model requires a paid project. See billing details.",
     styles: {
+      professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
+      sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
+      patterned_noir: { name: "Patterned Noir", desc: "High-contrast B&W with a dot matrix light pattern and low angle." },
+      surreal_hand: { name: "Dark Surrealism", desc: "High-contrast B&W, hand covering mouth with a smile etched on the palm." },
       corporate: { name: "Corporate Executive", desc: "Professional studio lighting, grey gradient background, sharp business attire." },
       tech_startup: { name: "Tech Founder", desc: "Modern open office background, smart casual, approachable yet leader-like." },
       outdoor: { name: "Outdoor Natural", desc: "Golden hour lighting, nature bokeh, warm and friendly atmosphere." },
@@ -114,6 +146,10 @@ export const TRANSLATIONS = {
     connectBtn: "اختيار مفتاح API",
     billingNote: "يتطلب هذا النموذج مشروعاً مدفوعاً. راجع تفاصيل الفوترة.",
     styles: {
+      professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
+      sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
+      patterned_noir: { name: "نوار منقط", desc: "أبيض وأسود بتباين عالي مع إضاءة بنمط نقاط وزاوية تصوير منخفضة." },
+      surreal_hand: { name: "سريالية مظلمة", desc: "صورة سوداء وبيضاء، يد تغطي الفم مع ابتسامة مرسومة على الكف." },
       corporate: { name: "مدير تنفيذي", desc: "إضاءة استوديو احترافية، خلفية رمادية متدرجة، زي رسمي أنيق." },
       tech_startup: { name: "رائد أعمال تقني", desc: "خلفية مكتب عصري مفتوح، ملابس أنيقة غير رسمية (Smart Casual)." },
       outdoor: { name: "إضاءة طبيعية", desc: "إضاءة الساعة الذهبية، خلفية طبيعية، جو دافئ وودود." },
