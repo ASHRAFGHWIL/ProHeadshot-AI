@@ -142,3 +142,33 @@ export const LampIcon: React.FC<{ className?: string }> = ({ className }) => (
     <path d="M8 22h8" />
   </svg>
 );
+
+export const BlindsIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M3 3h18" />
+    <path d="M20 7H8" />
+    <path d="M20 11H8" />
+    <path d="M10 19h10" />
+    <path d="M8 15h12" />
+    <path d="M4 3v14" />
+    <path d="M4 21h16" />
+  </svg>
+);
+
+export const SplitIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <line x1="12" y1="3" x2="12" y2="21" />
+    <path d="M12 8h4" />
+    <path d="M12 16h4" />
+  </svg>
+);
+
+export const SunglassesIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M2.5 10a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z" />
+    <path d="M16.5 10a2.5 2.5 0 1 1 5 0 2.5 2.5 0 0 1-5 0Z" />
+    <path d="M6 10c0-3.3 1.2-5 6-5s6 1.7 6 5" />
+    <path d="M2.5 10h19" />
+  </svg>
+);

@@ -16,6 +16,20 @@ export const STYLES_DATA: HeadshotStyle[] = [
     prompt: "Transform this pencil sketch into a high-quality, realistic digital portrait. Respect the original sketch's structure and composition. Enhance the image with professional digital painting techniques: apply realistic skin textures, dynamic lighting, and rich colors. Remove sketch lines and paper grain. The result should be a polished, studio-quality digital artwork."
   },
   {
+    id: "orange_blue",
+    name: "Orange & Blue Split",
+    previewColor: "bg-blue-800",
+    icon: "split",
+    prompt: "Create a portrait of this person, captured with meticulous detail and natural skin. The subject stands confidently in a smart, masculine pose—body slightly away from the camera, gaze gently turned to the side, and hands resting comfortably near chest. Attire is modern, casual menswear (fitted T-shirt or light shirt with jeans or tailored trousers). A striking vertical band of warm orange light brightens the face and body, creating strong contrast and deep shadows. The background is a clean, minimalist blue, bathed in cool ambient blue light. Maintain the subject's likeness. High resolution, photorealistic."
+  },
+  {
+    id: "dynamic_red",
+    name: "Dynamic Red",
+    previewColor: "bg-red-600",
+    icon: "sunglasses",
+    prompt: "Create a portrait of this person, likely in their forties, with the same facial features, hairstyle, and hair color as in the reference image, captured in sharp detail and with natural skin, stands in a dynamic, high-angle shot. He wears a black Designoart hat, stylish sunglasses that dangle slightly, a black leather jacket, a black shirt, black trousers, and black and gray sneakers. His right hand adjusts his sunglasses while his left rests on his hip, looking directly at the camera. The background is a bright, static red. Studio lighting, dramatic, high contrast, and natural shadows. Negative: Blurry, low resolution, extra edges, poor anatomy, watermark, text."
+  },
+  {
     id: "noir_lamp",
     name: "1940s Noir",
     previewColor: "bg-stone-950",
@@ -28,6 +42,13 @@ export const STYLES_DATA: HeadshotStyle[] = [
     previewColor: "bg-neutral-800",
     icon: "grid",
     prompt: "Create a monochromatic artistic portrait of this person. Illuminate them with high-contrast patterned light, creating a distinctive network of white dots and deep shadows on their features against a pure black background. The perspective should be from the ground looking up (low angle), with the subject looking directly into the lens. Cinematic 85mm f/1.4 style, rich texture, soft blur, subtle gray transitions. Meticulous detail, natural skin texture."
+  },
+  {
+    id: "outdoor_stripes",
+    name: "Striped Shadows",
+    previewColor: "bg-gray-500",
+    icon: "blinds",
+    prompt: "Create a bright, high-contrast black and white photograph of this person, shot outdoors against a plain light background. Capture them in full sharp detail with natural skin texture. The subject should be seen in a mid-shot, looking to the right, from a slightly low angle, wearing a light-colored, short-sleeved mesh button-up shirt. Strong directional lighting casts distinct striped shadows across their body and attire. Maintain the subject's likeness. Avoid: blurry, low-res, extra limbs, bad anatomy, watermark, text."
   },
   {
     id: "surreal_hand",
@@ -110,8 +131,11 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "Professional Retouch", desc: "Enhances clarity, lighting, and texture while preserving 100% of identity." },
       sketch_to_digital: { name: "Sketch to Digital", desc: "Transform pencil sketches into polished, realistic digital art." },
+      orange_blue: { name: "Orange & Blue Split", desc: "Modern masculine pose, vertical orange light strip, cool blue background." },
+      dynamic_red: { name: "Dynamic Red", desc: "High angle, red background, leather jacket, sunglasses." },
       noir_lamp: { name: "1940s Noir", desc: "Cinematic B&W, illuminated by a desk lamp, smoky atmosphere." },
       patterned_noir: { name: "Patterned Noir", desc: "High-contrast B&W with a dot matrix light pattern and low angle." },
+      outdoor_stripes: { name: "Striped Shadows", desc: "Bright high-contrast B&W, outdoor, mesh shirt, striped shadows." },
       surreal_hand: { name: "Dark Surrealism", desc: "High-contrast B&W, hand covering mouth with a smile etched on the palm." },
       corporate: { name: "Corporate Executive", desc: "Professional studio lighting, grey gradient background, sharp business attire." },
       tech_startup: { name: "Tech Founder", desc: "Modern open office background, smart casual, approachable yet leader-like." },
@@ -156,8 +180,11 @@ export const TRANSLATIONS = {
     styles: {
       professional_enhance: { name: "تحسين احترافي", desc: "تحسين الوضوح والإضاءة والملمس مع الحفاظ على الهوية بنسبة 100٪." },
       sketch_to_digital: { name: "رسم إلى رقمي", desc: "تحويل الرسومات الأولية إلى فن رقمي واقعي ومتقن." },
+      orange_blue: { name: "برتقالي وأزرق", desc: "إضاءة برتقالية عمودية، خلفية زرقاء باردة، ووقفة عصرية واثقة." },
+      dynamic_red: { name: "ديناميكي أحمر", desc: "زاوية عالية، خلفية حمراء، سترة جلدية، نظارات شمسية." },
       noir_lamp: { name: "نوار الأربعينات", desc: "أبيض وأسود سينمائي، إضاءة مصباح مكتب، جو ضبابي وكئيب." },
       patterned_noir: { name: "نوار منقط", desc: "أبيض وأسود بتباين عالي مع إضاءة بنمط نقاط وزاوية تصوير منخفضة." },
+      outdoor_stripes: { name: "ظلال مخططة", desc: "أبيض وأسود عالي التباين، خارجي، قميص شبكي، ظلال مخططة." },
       surreal_hand: { name: "سريالية مظلمة", desc: "صورة سوداء وبيضاء، يد تغطي الفم مع ابتسامة مرسومة على الكف." },
       corporate: { name: "مدير تنفيذي", desc: "إضاءة استوديو احترافية، خلفية رمادية متدرجة، زي رسمي أنيق." },
       tech_startup: { name: "رائد أعمال تقني", desc: "خلفية مكتب عصري مفتوح، ملابس أنيقة غير رسمية (Smart Casual)." },
