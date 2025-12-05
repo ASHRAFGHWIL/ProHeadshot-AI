@@ -7,11 +7,10 @@ export enum AppStep {
 
 export interface HeadshotStyle {
   id: string;
-  name: string;
-  description: string;
-  prompt: string;
+  name: string; // Used for fallback or internal logic
   icon: string; // Icon name reference
   previewColor: string;
+  prompt: string; // The backend prompt (usually kept in English for model performance)
 }
 
 export interface GeneratedImage {
@@ -20,5 +19,7 @@ export interface GeneratedImage {
 }
 
 export enum GeminiModel {
-  FLASH_IMAGE = 'gemini-2.5-flash-image',
+  PRO_IMAGE = 'gemini-3-pro-image-preview',
 }
+
+export type Language = 'en' | 'ar';

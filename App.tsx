@@ -1,6 +1,6 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { AppStep, HeadshotStyle } from './types';
-import { STYLES } from './constants';
+import React, { useState, useRef, useEffect } from 'react';
+import { AppStep, HeadshotStyle, Language } from './types';
+import { STYLES_DATA, TRANSLATIONS } from './constants';
 import { generateOrEditImage } from './services/geminiService';
 import StyleCard from './components/StyleCard';
 import { 
@@ -9,11 +9,13 @@ import {
   ChevronLeftIcon, 
   SparklesIcon, 
   DownloadIcon, 
-  RefreshIcon,
   MagicWandIcon
 } from './components/Icons';
 
 const App: React.FC = () => {
+  // Default to Arabic as requested
+  const [language, setLanguage] = useState<Language>('ar');
+  const [hasApiKey, setHasApiKey] = useState(false);
   const [currentStep, setCurrentStep] = useState<AppStep>(AppStep.UPLOAD);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedStyle, setSelectedStyle] = useState<HeadshotStyle | null>(null);
@@ -22,8 +24,43 @@ const App: React.FC = () => {
   const [editPrompt, setEditPrompt] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  // Use refs for file input to clear it if needed
+  const t = TRANSLATIONS[language];
+  const isRTL = language === 'ar';
+
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Update document font family based on language
+    if (language === 'ar') {
+      document.body.style.fontFamily = "'Cairo', sans-serif";
+    } else {
+      document.body.style.fontFamily = "'Inter', system-ui, sans-serif";
+    }
+  }, [language]);
+
+  useEffect(() => {
+    const checkApiKey = async () => {
+      if ((window as any).aistudio && (window as any).aistudio.hasSelectedApiKey) {
+        const has = await (window as any).aistudio.hasSelectedApiKey();
+        setHasApiKey(has);
+      } else {
+        // Fallback for environments where aistudio wrapper isn't present
+        setHasApiKey(true);
+      }
+    };
+    checkApiKey();
+  }, []);
+
+  const handleConnectApiKey = async () => {
+    try {
+      if ((window as any).aistudio) {
+        await (window as any).aistudio.openSelectKey();
+        setHasApiKey(true); // Assume success to mitigate race condition
+      }
+    } catch (e) {
+      console.error("API Key selection failed", e);
+    }
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -55,8 +92,17 @@ const App: React.FC = () => {
       setCurrentStep(AppStep.RESULT);
     } catch (err: any) {
       console.error(err);
-      setError(err.message || "Failed to generate image. Please try again.");
-      setCurrentStep(AppStep.STYLE_SELECTION);
+      
+      // Handle missing entity error by resetting key selection
+      if (err.message && err.message.includes("Requested entity was not found")) {
+        setHasApiKey(false);
+        setError("API Key invalid or not found. Please select your key again.");
+        // We stay on generation step or move back? Let's move back to STYLE to allow retry easily
+        setCurrentStep(AppStep.STYLE_SELECTION);
+      } else {
+        setError(t.errorGeneric);
+        setCurrentStep(AppStep.STYLE_SELECTION);
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -66,19 +112,20 @@ const App: React.FC = () => {
     if (!generatedImage || !editPrompt.trim()) return;
 
     setIsGenerating(true);
-    const previousImage = generatedImage;
-    // Temporarily show loading state in the result view
-    // We stay in RESULT step but show spinner
     
     try {
-      // Use the currently generated image as the base for editing
-      const resultBase64 = await generateOrEditImage(`data:image/jpeg;base64,${generatedImage}`, editPrompt);
+      const finalPrompt = editPrompt; 
+      const resultBase64 = await generateOrEditImage(`data:image/jpeg;base64,${generatedImage}`, finalPrompt);
       setGeneratedImage(resultBase64);
-      setEditPrompt(""); // Clear prompt on success
+      setEditPrompt(""); 
     } catch (err: any) {
       console.error(err);
-      setError("Failed to edit image. Try a different prompt.");
-      // Revert if needed or just show error. The generatedImage state is still the old one if we didn't update it.
+      if (err.message && err.message.includes("Requested entity was not found")) {
+        setHasApiKey(false);
+        setError("API Key issue. Please reconnect.");
+      } else {
+        setError(t.errorEdit);
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -108,17 +155,54 @@ const App: React.FC = () => {
 
   // --- Render Steps ---
 
+  const renderConnect = () => (
+    <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in px-4">
+      <div className="text-center mb-10 max-w-lg">
+        <div className="inline-flex items-center justify-center p-4 bg-brand-500/10 rounded-full mb-6 ring-1 ring-brand-500/30">
+          <SparklesIcon className="w-10 h-10 text-brand-400" />
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-arabic">
+          {t.connectTitle}
+        </h1>
+        <p className="text-slate-400 text-lg mb-8 font-arabic leading-relaxed">
+          {t.connectDesc}
+        </p>
+        
+        <button
+          onClick={handleConnectApiKey}
+          className="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5 font-arabic text-lg"
+        >
+          {t.connectBtn}
+        </button>
+
+        <div className="mt-8 pt-6 border-t border-slate-800">
+          <p className="text-sm text-slate-500 font-arabic mb-2">
+            {t.billingNote}
+          </p>
+          <a 
+            href="https://ai.google.dev/gemini-api/docs/billing" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-brand-400 hover:text-brand-300 text-sm underline decoration-brand-500/30 underline-offset-4"
+          >
+            ai.google.dev/gemini-api/docs/billing
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderUpload = () => (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in">
       <div className="text-center mb-12">
         <div className="inline-flex items-center justify-center p-3 bg-brand-500/10 rounded-full mb-4 ring-1 ring-brand-500/30">
           <CameraIcon className="w-8 h-8 text-brand-400" />
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent mb-4">
-          AI Headshot Photographer
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent mb-6 font-arabic leading-tight">
+          {t.title}
         </h1>
-        <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed">
-          Transform your casual selfies into professional, studio-quality headshots in seconds using Gemini AI.
+        <p className="text-slate-400 text-lg max-w-lg mx-auto leading-relaxed font-arabic">
+          {t.subtitle}
         </p>
       </div>
 
@@ -130,8 +214,8 @@ const App: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="flex flex-col items-center justify-center pt-5 pb-6 relative z-10">
             <UploadCloudIcon className="w-12 h-12 mb-4 text-slate-500 group-hover:text-brand-400 transition-colors" />
-            <p className="mb-2 text-lg text-slate-300 font-medium">Click to upload photo</p>
-            <p className="text-sm text-slate-500">SVG, PNG, JPG (Max 10MB)</p>
+            <p className="mb-2 text-lg text-slate-300 font-medium font-arabic">{t.uploadTitle}</p>
+            <p className="text-sm text-slate-500 font-arabic">{t.uploadSubtitle}</p>
           </div>
           <input 
             id="file-upload" 
@@ -151,18 +235,19 @@ const App: React.FC = () => {
       <div className="flex items-center mb-8">
         <button 
           onClick={handleReset}
-          className="mr-4 p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors"
+          className="ltr:mr-4 rtl:ml-4 p-2 hover:bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors"
         >
-          <ChevronLeftIcon className="w-6 h-6" />
+          {/* Rotate icon for RTL */}
+          <ChevronLeftIcon className={`w-6 h-6 ${isRTL ? 'rotate-180' : ''}`} />
         </button>
-        <h2 className="text-2xl font-bold text-white">Choose your style</h2>
+        <h2 className="text-2xl font-bold text-white font-arabic">{t.chooseStyle}</h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Preview of Uploaded Image */}
         <div className="lg:col-span-1">
           <div className="bg-slate-900 rounded-2xl p-4 border border-slate-800 sticky top-6">
-            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Source Image</h3>
+            <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 font-arabic">{t.sourceImage}</h3>
             <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-slate-950 shadow-2xl">
               {uploadedImage && (
                 <img 
@@ -178,14 +263,21 @@ const App: React.FC = () => {
         {/* Style Grid */}
         <div className="lg:col-span-2 space-y-6">
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {STYLES.map(style => (
-              <StyleCard 
-                key={style.id} 
-                style={style} 
-                isSelected={selectedStyle?.id === style.id} 
-                onSelect={handleStyleSelect} 
-              />
-            ))}
+            {STYLES_DATA.map(style => {
+              // Retrieve localized data safely
+              const styleData = t.styles[style.id as keyof typeof t.styles];
+              
+              return (
+                <StyleCard 
+                  key={style.id} 
+                  style={style} 
+                  name={styleData.name}
+                  description={styleData.desc}
+                  isSelected={selectedStyle?.id === style.id} 
+                  onSelect={handleStyleSelect} 
+                />
+              );
+            })}
           </div>
 
           <div className="flex justify-end pt-4">
@@ -193,20 +285,20 @@ const App: React.FC = () => {
               onClick={handleGenerate}
               disabled={!selectedStyle}
               className={`
-                flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg
+                flex items-center px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg font-arabic
                 ${selectedStyle 
                   ? 'bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5' 
                   : 'bg-slate-800 text-slate-500 cursor-not-allowed'
                 }
               `}
             >
-              <SparklesIcon className="w-5 h-5 mr-2" />
-              Generate Headshot
+              <SparklesIcon className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
+              {t.generateBtn}
             </button>
           </div>
           
           {error && (
-            <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-xl text-red-200 mt-4">
+            <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-xl text-red-200 mt-4 font-arabic">
               {error}
             </div>
           )}
@@ -224,9 +316,9 @@ const App: React.FC = () => {
           <SparklesIcon className="w-8 h-8 text-brand-500 animate-pulse" />
         </div>
       </div>
-      <h2 className="text-3xl font-bold text-white mb-3">Creating Magic</h2>
-      <p className="text-slate-400 text-lg max-w-md">
-        Gemini is analyzing your features and applying the <span className="text-brand-400 font-semibold">{selectedStyle?.name}</span> style...
+      <h2 className="text-3xl font-bold text-white mb-3 font-arabic">{t.generatingTitle}</h2>
+      <p className="text-slate-400 text-lg max-w-md font-arabic leading-relaxed">
+        {t.generatingDesc}
       </p>
     </div>
   );
@@ -238,16 +330,16 @@ const App: React.FC = () => {
           onClick={handleReset}
           className="flex items-center text-slate-400 hover:text-white transition-colors"
         >
-          <ChevronLeftIcon className="w-5 h-5 mr-1" />
-          Start Over
+          <ChevronLeftIcon className={`w-5 h-5 ltr:mr-1 rtl:ml-1 ${isRTL ? 'rotate-180' : ''}`} />
+          <span className="font-arabic">{t.startOver}</span>
         </button>
         <div className="flex gap-3">
            <button 
             onClick={handleDownload}
             className="flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg transition-colors border border-slate-700"
           >
-            <DownloadIcon className="w-4 h-4 mr-2" />
-            Download
+            <DownloadIcon className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+            <span className="font-arabic">{t.download}</span>
           </button>
         </div>
       </div>
@@ -260,7 +352,7 @@ const App: React.FC = () => {
                <div className="absolute inset-0 z-20 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center">
                  <div className="flex flex-col items-center">
                     <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-                    <p className="text-white font-medium">Refining image...</p>
+                    <p className="text-white font-medium font-arabic">{t.refining}</p>
                  </div>
                </div>
             )}
@@ -272,42 +364,40 @@ const App: React.FC = () => {
                 className="w-full h-full object-cover"
               />
             )}
-            
-            {/* Compare on hover (optional enhancement, kept simple for now) */}
           </div>
         </div>
 
         {/* Controls & Editing */}
         <div className="flex flex-col justify-center space-y-8">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-2">Your Professional Headshot</h2>
-            <p className="text-slate-400">
-              Generated using the <strong>{selectedStyle?.name}</strong> style. You can download it now or use AI to refine specific details.
+            <h2 className="text-3xl font-bold text-white mb-2 font-arabic">{t.resultTitle}</h2>
+            <p className="text-slate-400 font-arabic leading-relaxed">
+              {t.resultDesc}
             </p>
           </div>
 
           <div className="bg-slate-900/50 rounded-xl p-6 border border-slate-800">
             <div className="flex items-center mb-4 text-brand-400">
-              <MagicWandIcon className="w-5 h-5 mr-2" />
-              <h3 className="font-semibold uppercase tracking-wide text-sm">AI Magic Editor</h3>
+              <MagicWandIcon className="w-5 h-5 ltr:mr-2 rtl:ml-2" />
+              <h3 className="font-semibold uppercase tracking-wide text-sm font-arabic">{t.magicEditor}</h3>
             </div>
             
-            <p className="text-sm text-slate-400 mb-4">
-              Not quite right? Describe what you want to change.
+            <p className="text-sm text-slate-400 mb-4 font-arabic">
+              {t.magicEditorDesc}
             </p>
 
             <div className="relative">
               <textarea
                 value={editPrompt}
                 onChange={(e) => setEditPrompt(e.target.value)}
-                placeholder="e.g. 'Make the background blurred office', 'Add a smile', 'Make the lighting warmer', 'Add a vintage filter'"
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none h-32"
+                placeholder={t.magicEditorPlaceholder}
+                className="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none h-32 font-arabic"
                 disabled={isGenerating}
               />
               <button
                 onClick={handleEdit}
                 disabled={isGenerating || !editPrompt.trim()}
-                className="absolute bottom-4 right-4 p-2 bg-brand-600 hover:bg-brand-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                className="absolute bottom-4 ltr:right-4 rtl:left-4 p-2 bg-brand-600 hover:bg-brand-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
                 title="Apply Edit"
               >
                 <SparklesIcon className="w-5 h-5" />
@@ -315,26 +405,20 @@ const App: React.FC = () => {
             </div>
             
              {error && (
-              <p className="mt-3 text-red-400 text-sm">{error}</p>
+              <p className="mt-3 text-red-400 text-sm font-arabic">{error}</p>
             )}
           </div>
 
            <div className="bg-slate-800/30 rounded-xl p-6 border border-slate-800/50">
-             <h4 className="text-sm font-semibold text-slate-300 mb-3">Quick Actions</h4>
+             <h4 className="text-sm font-semibold text-slate-300 mb-3 font-arabic">{t.quickActions}</h4>
              <div className="flex flex-wrap gap-2">
-               {[
-                 "Make it black and white",
-                 "Brighten the lighting",
-                 "Blur the background more",
-                 "Make it look more serious"
-               ].map((prompt) => (
+               {t.quickPrompts.map((prompt) => (
                  <button
                    key={prompt}
                    onClick={() => {
                      setEditPrompt(prompt);
-                     // Optional: auto-submit or let user submit
                    }}
-                   className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs text-slate-300 transition-colors"
+                   className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs text-slate-300 transition-colors font-arabic"
                  >
                    {prompt}
                  </button>
@@ -347,28 +431,47 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand-500/30">
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand-500/30 transition-all duration-300">
       {/* Header */}
       <header className="border-b border-slate-800/50 backdrop-blur-md sticky top-0 z-50 bg-slate-950/80">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2" onClick={handleReset} style={{cursor: 'pointer'}}>
+          <div className="flex items-center space-x-2 rtl:space-x-reverse" onClick={handleReset} style={{cursor: 'pointer'}}>
             <div className="bg-gradient-to-tr from-brand-600 to-brand-400 p-1.5 rounded-lg">
               <CameraIcon className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg tracking-tight">ProHeadshot<span className="text-brand-400">AI</span></span>
+            <span className="font-bold text-lg tracking-tight font-arabic">
+              {language === 'ar' ? 'مصور' : 'ProHeadshot'}
+              <span className="text-brand-400">{language === 'ar' ? 'البورتريه' : 'AI'}</span>
+            </span>
           </div>
-          <div className="text-xs font-mono text-slate-600 border border-slate-800 rounded px-2 py-1">
-             v1.0 • Gemini 2.5 Flash
+          
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setLanguage(l => l === 'en' ? 'ar' : 'en')}
+              className="text-sm font-semibold px-3 py-1 rounded-lg border border-slate-700 hover:bg-slate-800 transition-colors"
+            >
+              {language === 'en' ? 'العربية' : 'English'}
+            </button>
+            <div className="text-xs font-mono text-slate-600 border border-slate-800 rounded px-2 py-1 hidden sm:block">
+               v2.0 • Pro
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex-grow flex flex-col">
-        {currentStep === AppStep.UPLOAD && renderUpload()}
-        {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
-        {currentStep === AppStep.GENERATING && renderGenerating()}
-        {currentStep === AppStep.RESULT && renderResult()}
+        {!hasApiKey 
+          ? renderConnect() 
+          : (
+            <>
+              {currentStep === AppStep.UPLOAD && renderUpload()}
+              {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
+              {currentStep === AppStep.GENERATING && renderGenerating()}
+              {currentStep === AppStep.RESULT && renderResult()}
+            </>
+          )
+        }
       </main>
     </div>
   );
