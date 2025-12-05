@@ -37,6 +37,20 @@ export const STYLES_DATA: HeadshotStyle[] = [
     prompt: "Create a high-quality, hand-painted oil portrait of this person. Apply the aesthetic of traditional oil painting with visible, textured brushstrokes (impasto) and rich, layered colors. The image should exhibit the physical properties of oil paint on canvas, including soft edges, organic blending, and tonal depth. Lighting should be atmospheric and classical, enhancing the subject's features with a warm, painterly glow. The background should be abstract and textured. Negative: digital smoothness, vector art, hyper-realistic photography, flat colors."
   },
   {
+    id: "pastel_art",
+    name: "Pastel Art",
+    previewColor: "bg-rose-400",
+    icon: "crayon",
+    prompt: "Create a soft, hand-drawn pastel illustration of this person. Render the image with the texture of dry pastel crayons on coarse-grain paper, featuring visible stroke marks, soft blending, and powdery edges. The lighting should be warm and diffused, creating gentle shadows and highlights. The color palette should be harmonious and slightly desaturated, characteristic of traditional pastel art. Maintain the subject's likeness while prioritizing an artistic, sketch-like quality with organic imperfections. Negative: shiny digital look, vector sharpness, hyper-realism, dark harsh shadows."
+  },
+  {
+    id: "surreal_cracks",
+    name: "Surreal Cracks",
+    previewColor: "bg-neutral-900",
+    icon: "cracked_mask",
+    prompt: "Using the uploaded image as a reference, create a high-resolution, black-and-white close-up showing the right side of the subject's face, focusing on the eye and cheek. The composition is a tight vertical crop, highlighting the texture and surreal transformation of the face. Facial Features and Transformation: The subject has a well-defined jaw and cheekbones, natural lips, and a strong nose. The right eye is completely colorless, designed as a solid, reflective black sphere (sclera and iris are black), giving a dramatic and unsettling appearance. The skin around the eye and cheekbones, extending slightly onto the forehead and jaw, is covered with a thick, cracked layer resembling peeling paint, dried plaster, or old porcelain (cracker effect). This cracked layer is white/light gray, contrasting sharply with the dark, textured, granular surface visible beneath. A single, teardrop-shaped droplet of white, cracked material is visible just below the lower eyelid. The hair is natural, short, or styled as in the reference image and is clearly visible at the far left of the image. Composition and Perspective: Extremely close-up, portrait orientation. The focus is sharp on the eye and the intricate texture of the flaking skin, with a shallow depth of field that blurs the background and the left side of the face/hair. The perspective is slightly angled, looking directly at the right side of the face. Color and Tone: Black and white monochrome. The high contrast highlights the stark white cracks on the dark, rough-textured underlayer and the deep black eye. Rich tonal variations range from bright white on the flaking edges and raised lip areas, through detailed medium grays in the rough-textured areas, to deep black in the eye and shadow areas. Lighting and Atmosphere: Dramatic studio lighting, with a main light slightly angled forward to the right, casts sharp highlights on the flaky edges and lips, and deep shadows that enhance the three-dimensional texture of the cracks. The atmosphere is dark, surreal, unsettling, and richly textured. Artistic Style: Hyperrealistic photography, conceptual portraiture, dark fantasy, horror-inspired, highly detailed texture drawing, realistic rendering, 8K resolution, cinematic quality. Negative Notes: Full body, animation, drawing, low resolution, blurred edges, colors, colored eyes, multiple subjects, text, signature."
+  },
+  {
     id: "orange_blue",
     name: "Orange & Blue Split",
     previewColor: "bg-blue-800",
@@ -176,6 +190,8 @@ export const TRANSLATIONS = {
       pencil_sketch: { name: "Pencil Sketch", desc: "Hand-drawn graphite look on textured paper with detailed cross-hatching and shading." },
       watercolor_art: { name: "Watercolor Art", desc: "Hand-painted watercolor illustration with soft washes, visible brush textures, and organic edges." },
       oil_painting: { name: "Oil Painting", desc: "Classic oil-on-canvas aesthetic with rich impasto textures and atmospheric lighting." },
+      pastel_art: { name: "Pastel Art", desc: "Soft, hand-drawn pastel illustration with crayon textures and gentle blending." },
+      surreal_cracks: { name: "Surreal Cracks", desc: "High-contrast B&W close-up with cracked porcelain texture and black eye." },
       orange_blue: { name: "Orange & Blue Split", desc: "Modern masculine pose, vertical orange light strip, cool blue background." },
       dynamic_red: { name: "Dynamic Red", desc: "High angle, red background, leather jacket, sunglasses." },
       neon_night: { name: "Neon Night", desc: "Urban night scene with vibrant pink and blue neon lights, black leather jacket." },
@@ -231,6 +247,8 @@ export const TRANSLATIONS = {
       pencil_sketch: { name: "رسم بقلم الرصاص", desc: "مظهر رسم يدوي بالجرافيت على ورق محكم مع تظليل وتفاصيل دقيقة." },
       watercolor_art: { name: "فن الألوان المائية", desc: "رسم بالألوان المائية يدويًا مع تدرجات ناعمة وملمس فرشاة مرئي." },
       oil_painting: { name: "لوحة زيتية", desc: "جمالية الزيت الكلاسيكي على القماش مع قوام بارز وإضاءة جوية." },
+      pastel_art: { name: "فن الباستيل", desc: "رسم يدوي ناعم بألوان الباستيل مع قوام طباشيري وإضاءة دافئة." },
+      surreal_cracks: { name: "تشققات سريالية", desc: "صورة مقربة بالأبيض والأسود مع نسيج بورسلين متصدع وعين سوداء." },
       orange_blue: { name: "برتقالي وأزرق", desc: "إضاءة برتقالية عمودية، خلفية زرقاء باردة، ووقفة عصرية واثقة." },
       dynamic_red: { name: "ديناميكي أحمر", desc: "زاوية عالية، خلفية حمراء، سترة جلدية، نظارات شمسية." },
       neon_night: { name: "ليلة نيون", desc: "مشهد ليلي حضري بأضواء نيون وردية وزرقاء نابضة بالحياة، سترة جلدية سوداء." },

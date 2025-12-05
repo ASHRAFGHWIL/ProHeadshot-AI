@@ -219,3 +219,18 @@ export const PaletteIcon: React.FC<{ className?: string }> = ({ className }) => 
     <circle cx="16.5" cy="10.5" r=".5" fill="currentColor" />
   </svg>
 );
+
+export const CrayonIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z" />
+    <path d="m5 13 4 4" />
+    <path d="m22 7-5.5 5.5" />
+  </svg>
+);
+
+export const CrackedFaceIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 2a10 10 0 1 0 10 10 10 10 0 0 0-10-10Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z" />
+    <path d="M15 5 9 11l3 3-4 5" />
+  </svg>
+);
