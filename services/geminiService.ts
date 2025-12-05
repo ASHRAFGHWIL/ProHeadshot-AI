@@ -3,7 +3,7 @@ import { GeminiModel } from "../types";
 
 /**
  * Generates or edits an image based on an input image and a text prompt.
- * Uses Gemini 3 Pro Image ("nano banana pro").
+ * Uses Gemini 2.5 Flash Image.
  * 
  * @param imageBase64 - The input image in base64 format (stripped of data:image/xyz;base64, prefix if possible, but the API handles cleaned base64)
  * @param prompt - The text instruction for the model
@@ -16,15 +16,15 @@ export const generateOrEditImage = async (
   mimeType: string = 'image/jpeg'
 ): Promise<string> => {
   try {
-    // Initialize the Gemini client dynamically to ensure it uses the latest API key
-    // process.env.API_KEY is injected by the environment after selection.
+    // Initialize the Gemini client
+    // process.env.API_KEY is injected by the environment
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
     // Ensure clean base64 string
     const cleanBase64 = imageBase64.replace(/^data:image\/\w+;base64,/, "");
 
     const response = await ai.models.generateContent({
-      model: GeminiModel.PRO_IMAGE,
+      model: GeminiModel.FLASH_IMAGE,
       contents: {
         parts: [
           {
@@ -38,11 +38,11 @@ export const generateOrEditImage = async (
           },
         ],
       },
-      // Config for gemini-3-pro-image-preview
+      // Config for gemini-2.5-flash-image
+      // Note: imageSize is not supported in Flash Image, but aspectRatio is.
       config: {
         imageConfig: {
           aspectRatio: "3:4", // Matches UI vertical aspect ratio
-          imageSize: "1K", // Default for Pro model
         }
       }
     });

@@ -15,7 +15,6 @@ import {
 const App: React.FC = () => {
   // Default to Arabic as requested
   const [language, setLanguage] = useState<Language>('ar');
-  const [hasApiKey, setHasApiKey] = useState(false);
   const [currentStep, setCurrentStep] = useState<AppStep>(AppStep.UPLOAD);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [selectedStyle, setSelectedStyle] = useState<HeadshotStyle | null>(null);
@@ -37,30 +36,6 @@ const App: React.FC = () => {
       document.body.style.fontFamily = "'Inter', system-ui, sans-serif";
     }
   }, [language]);
-
-  useEffect(() => {
-    const checkApiKey = async () => {
-      if ((window as any).aistudio && (window as any).aistudio.hasSelectedApiKey) {
-        const has = await (window as any).aistudio.hasSelectedApiKey();
-        setHasApiKey(has);
-      } else {
-        // Fallback for environments where aistudio wrapper isn't present
-        setHasApiKey(true);
-      }
-    };
-    checkApiKey();
-  }, []);
-
-  const handleConnectApiKey = async () => {
-    try {
-      if ((window as any).aistudio) {
-        await (window as any).aistudio.openSelectKey();
-        setHasApiKey(true); // Assume success to mitigate race condition
-      }
-    } catch (e) {
-      console.error("API Key selection failed", e);
-    }
-  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -92,17 +67,8 @@ const App: React.FC = () => {
       setCurrentStep(AppStep.RESULT);
     } catch (err: any) {
       console.error(err);
-      
-      // Handle missing entity error by resetting key selection
-      if (err.message && err.message.includes("Requested entity was not found")) {
-        setHasApiKey(false);
-        setError("API Key invalid or not found. Please select your key again.");
-        // We stay on generation step or move back? Let's move back to STYLE to allow retry easily
-        setCurrentStep(AppStep.STYLE_SELECTION);
-      } else {
-        setError(t.errorGeneric);
-        setCurrentStep(AppStep.STYLE_SELECTION);
-      }
+      setError(t.errorGeneric);
+      setCurrentStep(AppStep.STYLE_SELECTION);
     } finally {
       setIsGenerating(false);
     }
@@ -120,12 +86,7 @@ const App: React.FC = () => {
       setEditPrompt(""); 
     } catch (err: any) {
       console.error(err);
-      if (err.message && err.message.includes("Requested entity was not found")) {
-        setHasApiKey(false);
-        setError("API Key issue. Please reconnect.");
-      } else {
-        setError(t.errorEdit);
-      }
+      setError(t.errorEdit);
     } finally {
       setIsGenerating(false);
     }
@@ -147,50 +108,13 @@ const App: React.FC = () => {
     if (!generatedImage) return;
     const link = document.createElement('a');
     link.href = `data:image/jpeg;base64,${generatedImage}`;
-    link.download = `pro-headshot-${Date.now()}.jpg`;
+    link.download = `headshot-${Date.now()}.jpg`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   // --- Render Steps ---
-
-  const renderConnect = () => (
-    <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in px-4">
-      <div className="text-center mb-10 max-w-lg">
-        <div className="inline-flex items-center justify-center p-4 bg-brand-500/10 rounded-full mb-6 ring-1 ring-brand-500/30">
-          <SparklesIcon className="w-10 h-10 text-brand-400" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 font-arabic">
-          {t.connectTitle}
-        </h1>
-        <p className="text-slate-400 text-lg mb-8 font-arabic leading-relaxed">
-          {t.connectDesc}
-        </p>
-        
-        <button
-          onClick={handleConnectApiKey}
-          className="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5 font-arabic text-lg"
-        >
-          {t.connectBtn}
-        </button>
-
-        <div className="mt-8 pt-6 border-t border-slate-800">
-          <p className="text-sm text-slate-500 font-arabic mb-2">
-            {t.billingNote}
-          </p>
-          <a 
-            href="https://ai.google.dev/gemini-api/docs/billing" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-brand-400 hover:text-brand-300 text-sm underline decoration-brand-500/30 underline-offset-4"
-          >
-            ai.google.dev/gemini-api/docs/billing
-          </a>
-        </div>
-      </div>
-    </div>
-  );
 
   const renderUpload = () => (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in">
@@ -440,7 +364,7 @@ const App: React.FC = () => {
               <CameraIcon className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-lg tracking-tight font-arabic">
-              {language === 'ar' ? 'مصور' : 'ProHeadshot'}
+              {language === 'ar' ? 'مصور' : 'Headshot'}
               <span className="text-brand-400">{language === 'ar' ? 'البورتريه' : 'AI'}</span>
             </span>
           </div>
@@ -453,7 +377,7 @@ const App: React.FC = () => {
               {language === 'en' ? 'العربية' : 'English'}
             </button>
             <div className="text-xs font-mono text-slate-600 border border-slate-800 rounded px-2 py-1 hidden sm:block">
-               v2.0 • Pro
+               v2.0 • Flash
             </div>
           </div>
         </div>
@@ -461,17 +385,10 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex-grow flex flex-col">
-        {!hasApiKey 
-          ? renderConnect() 
-          : (
-            <>
-              {currentStep === AppStep.UPLOAD && renderUpload()}
-              {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
-              {currentStep === AppStep.GENERATING && renderGenerating()}
-              {currentStep === AppStep.RESULT && renderResult()}
-            </>
-          )
-        }
+        {currentStep === AppStep.UPLOAD && renderUpload()}
+        {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
+        {currentStep === AppStep.GENERATING && renderGenerating()}
+        {currentStep === AppStep.RESULT && renderResult()}
       </main>
     </div>
   );

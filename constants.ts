@@ -28,6 +28,20 @@ export const STYLES_DATA: HeadshotStyle[] = [
     previewColor: "bg-stone-900",
     icon: "camera",
     prompt: "Transform this person into a dramatic black and white studio portrait. Use a pure black background. Lighting should be Rembrandt style with high contrast and deep shadows to create depth. The person should look serious and thoughtful. Attire should be simple and dark (e.g., black turtleneck). Maintain facial identity. High resolution, photorealistic, monochrome."
+  },
+  {
+    id: "vintage_film",
+    name: "Vintage Film",
+    previewColor: "bg-sepia-600", // Will need a custom class or fallback, using sepia tone mapping roughly to amber-900 or orange-900
+    icon: "film",
+    prompt: "Transform this person into a vintage film style portrait. Apply a sepia tone or warm desaturated color palette with grain texture. The background should be a textured, abstract vintage wall or fabric. Lighting should be soft and natural, reminiscent of early 20th-century photography. Attire should appear timeless. Maintain facial identity. High resolution, photorealistic, cinematic, film grain."
+  },
+  {
+    id: "cyberpunk",
+    name: "Cyberpunk Neon",
+    previewColor: "bg-purple-600",
+    icon: "zap",
+    prompt: "Transform this person into a futuristic cyberpunk character. The background should be a blurred neon-lit futuristic city at night with pink and blue hues. The lighting on the face should be dramatic, with neon rim lighting (magenta and cyan). Attire can include a futuristic jacket or collar detail. Maintain facial identity. High resolution, photorealistic, 8k, cinematic."
   }
 ];
 
@@ -53,6 +67,7 @@ export const TRANSLATIONS = {
     refining: "Refining image...",
     errorGeneric: "Failed to generate image. Please try again.",
     errorEdit: "Failed to edit image. Try a different prompt.",
+    errorBilling: "Permission denied. This model requires a Paid Google Cloud Project. Please select a different API key.",
     connectTitle: "Connect Google AI",
     connectDesc: "To use the professional model (Nano Banana Pro), you need to select your Google Cloud project.",
     connectBtn: "Select API Key",
@@ -62,6 +77,8 @@ export const TRANSLATIONS = {
       tech_startup: { name: "Tech Founder", desc: "Modern open office background, smart casual, approachable yet leader-like." },
       outdoor: { name: "Outdoor Natural", desc: "Golden hour lighting, nature bokeh, warm and friendly atmosphere." },
       studio_bw: { name: "Studio B&W", desc: "High contrast black and white, dramatic shadows, artistic and timeless." },
+      vintage_film: { name: "Vintage Film", desc: "Sepia tones, film grain texture, timeless and nostalgic atmosphere." },
+      cyberpunk: { name: "Cyberpunk Neon", desc: "Futuristic neon lighting, night city background, vibrant pinks and blues." },
     },
     quickPrompts: [
       "Make it black and white",
@@ -91,6 +108,7 @@ export const TRANSLATIONS = {
     refining: "جاري تحسين الصورة...",
     errorGeneric: "فشل إنشاء الصورة. يرجى المحاولة مرة أخرى.",
     errorEdit: "فشل التعديل. حاول استخدام وصف مختلف.",
+    errorBilling: "تم رفض الإذن. يتطلب هذا النموذج مشروعاً مدفوعاً. يرجى اختيار مفتاح API آخر.",
     connectTitle: "ربط Google AI",
     connectDesc: "لاستخدام النموذج الاحترافي (Nano Banana Pro)، يجب اختيار مشروع Google Cloud الخاص بك.",
     connectBtn: "اختيار مفتاح API",
@@ -100,6 +118,8 @@ export const TRANSLATIONS = {
       tech_startup: { name: "رائد أعمال تقني", desc: "خلفية مكتب عصري مفتوح، ملابس أنيقة غير رسمية (Smart Casual)." },
       outdoor: { name: "إضاءة طبيعية", desc: "إضاءة الساعة الذهبية، خلفية طبيعية، جو دافئ وودود." },
       studio_bw: { name: "استوديو أبيض وأسود", desc: "تباين عالي، ظلال درامية، طابع فني كلاسيكي." },
+      vintage_film: { name: "طابع سينمائي كلاسيكي", desc: "ألوان دافئة (Sepia)، نسيج محبب، ومظهر كلاسيكي خالد." },
+      cyberpunk: { name: "سايبر بانك نيون", desc: "ألوان نيون زاهية، خلفية مدينة مستقبلية، وإضاءة درامية." },
     },
     quickPrompts: [
       "اجعلها بالأبيض والأسود",
