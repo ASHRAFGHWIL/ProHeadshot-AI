@@ -29,10 +29,6 @@ const App: React.FC = () => {
   const [editPrompt, setEditPrompt] = useState("");
   const [error, setError] = useState<string | null>(null);
   
-  // API Key State
-  const [hasApiKey, setHasApiKey] = useState(false);
-  const [checkingKey, setCheckingKey] = useState(true);
-
   // Gallery state
   const [imageLibrary, setImageLibrary] = useState<string[]>([]);
   const [showGallery, setShowGallery] = useState(false);
@@ -51,32 +47,9 @@ const App: React.FC = () => {
     }
   }, [language]);
 
-  // Check for API Key on mount
-  useEffect(() => {
-    const checkKey = async () => {
-      try {
-        if (window.aistudio && window.aistudio.hasSelectedApiKey) {
-           const hasKey = await window.aistudio.hasSelectedApiKey();
-           setHasApiKey(hasKey);
-        } else {
-           // Fallback for dev environments without the wrapper
-           setHasApiKey(true);
-        }
-      } catch (e) {
-        console.error("Failed to check API key", e);
-        setHasApiKey(false);
-      } finally {
-        setCheckingKey(false);
-      }
-    };
-    checkKey();
-  }, []);
-
   const handleSelectKey = async () => {
     if (window.aistudio && window.aistudio.openSelectKey) {
       await window.aistudio.openSelectKey();
-      // Assume success after dialog interaction to avoid race conditions
-      setHasApiKey(true);
     }
   };
 
@@ -166,7 +139,6 @@ const App: React.FC = () => {
       
       // Handle key missing error (re-prompt)
       if (err.message && (err.message.includes("Requested entity was not found") || err.message.includes("404"))) {
-        setHasApiKey(false);
         setError(t.errorBilling);
         setCurrentStep(AppStep.STYLE_SELECTION);
       } else if (err.message && err.message.includes("content policy")) {
@@ -194,7 +166,6 @@ const App: React.FC = () => {
     } catch (err: any) {
       console.error(err);
       if (err.message && (err.message.includes("Requested entity was not found") || err.message.includes("404"))) {
-         setHasApiKey(false);
          setError(t.errorBilling);
       } else {
          setError(t.errorEdit);
@@ -227,31 +198,6 @@ const App: React.FC = () => {
   };
 
   // --- Render Steps ---
-
-  const renderKeySelection = () => (
-    <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in p-6">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
-        <div className="inline-flex items-center justify-center p-4 bg-brand-500/10 rounded-full mb-6">
-           <ZapIcon className="w-8 h-8 text-brand-400" />
-        </div>
-        <h2 className="text-2xl font-bold text-white mb-4 font-arabic">{t.connectTitle}</h2>
-        <p className="text-slate-400 mb-8 font-arabic leading-relaxed">
-          {t.connectDesc}
-        </p>
-        <button
-          onClick={handleSelectKey}
-          className="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg font-arabic flex items-center justify-center gap-2"
-        >
-          {t.connectBtn}
-        </button>
-        <div className="mt-4 text-xs text-slate-500 font-arabic">
-          <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noreferrer" className="underline hover:text-brand-400">
-             {t.billingNote}
-          </a>
-        </div>
-      </div>
-    </div>
-  );
 
   const renderUpload = () => (
     <div className="flex flex-col items-center justify-center h-full min-h-[60vh] animate-fade-in">
@@ -572,12 +518,6 @@ const App: React.FC = () => {
     </div>
   );
 
-  if (checkingKey) {
-     return <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-         <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
-     </div>;
-  }
-
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-brand-500/30 transition-all duration-300">
       {/* Header */}
@@ -614,14 +554,10 @@ const App: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex-grow flex flex-col">
-        {!hasApiKey ? renderKeySelection() : (
-            <>
-                {currentStep === AppStep.UPLOAD && renderUpload()}
-                {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
-                {currentStep === AppStep.GENERATING && renderGenerating()}
-                {currentStep === AppStep.RESULT && renderResult()}
-            </>
-        )}
+          {currentStep === AppStep.UPLOAD && renderUpload()}
+          {currentStep === AppStep.STYLE_SELECTION && renderStyleSelection()}
+          {currentStep === AppStep.GENERATING && renderGenerating()}
+          {currentStep === AppStep.RESULT && renderResult()}
       </main>
       
       {/* Gallery Modal */}
