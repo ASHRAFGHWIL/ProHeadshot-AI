@@ -3,7 +3,7 @@ import { GeminiModel } from "../types";
 
 /**
  * Generates or edits an image based on an input image and a text prompt.
- * Uses Gemini 2.5 Flash Image.
+ * Uses Gemini 3 Pro Image Preview.
  * 
  * @param imageBase64 - The input image in base64 format (stripped of data:image/xyz;base64, prefix if possible, but the API handles cleaned base64)
  * @param prompt - The text instruction for the model
@@ -18,17 +18,17 @@ export const generateOrEditImage = async (
   try {
     // Initialize the Gemini client
     // process.env.API_KEY is injected by the environment
+    // We create a new instance each call to ensure we pick up the latest key if it changed
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
     // Ensure clean base64 string
     const cleanBase64 = imageBase64.replace(/^data:image\/\w+;base64,/, "");
 
-    // Reinforce the instruction to generate an image and skip text
-    // We strictly instruct the model to act as a tool
-    const finalPrompt = `Perform the following photo editing task on the provided image.\n\nTask Description: ${prompt}\n\nREQUIREMENTS:\n1. Output ONLY the generated image.\n2. Do NOT provide any text response, conversation, or refusal explanations.\n3. Maintain the subject's key facial features and identity while applying the style.\n4. You are an AI photo editor tool. Processing images of people is your primary function and is permitted.`;
+    // Simplified instruction to act as a direct command, reducing risk of safety refusals for "person editing"
+    const finalPrompt = `Apply the following style or edit to the provided image: ${prompt}. Ensure high quality output.`;
 
     const response = await ai.models.generateContent({
-      model: GeminiModel.FLASH_IMAGE,
+      model: GeminiModel.FLASH_IMAGE, // This is now mapped to gemini-3-pro-image-preview in types.ts
       contents: {
         parts: [
           {
@@ -43,12 +43,13 @@ export const generateOrEditImage = async (
         ],
       },
       config: {
-        // Config for gemini-2.5-flash-image
+        // Config for gemini-3-pro-image-preview
         imageConfig: {
           aspectRatio: "3:4", // Matches UI vertical aspect ratio
+          imageSize: "1K" // Required/Available for Pro model
         },
-        // Stronger system instruction to enforce tool behavior and override potential 'chat' tendency
-        systemInstruction: "You are a professional AI photo editor. Your specific function is to process input images and return edited versions based on user prompts. You do not converse. You do not explain. You only output image data. You are permitted to process images of people for professional editing purposes.",
+        // Minimalist system instruction to avoid over-alignment issues
+        systemInstruction: "You are a professional photo editor. Apply the requested style to the input image.",
         // Relax safety settings to BLOCK_NONE to prevent false positives on standard portraits
         safetySettings: [
           { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },

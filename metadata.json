@@ -1,5 +1,5 @@
 {
   "name": "ProHeadshot AI",
-  "description": "Transform casual selfies into professional headshots using Gemini 2.5 Flash Image. Upload a photo, choose a style, and refine with text prompts.",
+  "description": "Transform casual selfies into professional headshots using Gemini 3 Pro Image Preview (Nano Banana Pro). Upload a photo, choose a style, and refine with text prompts.",
   "requestFramePermissions": []
 }

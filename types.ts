@@ -19,7 +19,7 @@ export interface GeneratedImage {
 }
 
 export enum GeminiModel {
-  FLASH_IMAGE = 'gemini-2.5-flash-image',
+  FLASH_IMAGE = 'gemini-3-pro-image-preview',
 }
 
 export type Language = 'en' | 'ar';
